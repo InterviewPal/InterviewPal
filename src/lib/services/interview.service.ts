@@ -2,37 +2,47 @@ import {RedisService} from "@/lib/services/redis.service";
 import {OpenAIStreamService} from "@/lib/services/openAIStream.service";
 import {InterviewRepository} from "@/lib/repositories/interview.repository";
 import {UserRepository} from "@/lib/repositories/user.repository";
-import {AssessAllInterviewQuestionsPayload} from "@/lib/dtos/assessAllInterviewQuestions.payload";
+import {AssessAllInterviewQuestionsPayload, InterviewQuestionSubmissionPayload} from "@/lib/dtos";
 
 type questionType = "introductory" | "technical";
 
 // name, type of interview,
 
-interface InterviewQuestionPayload {
-    tmpUserUUID: string;
-    interviewUUID: string;
-    promptNumber: number;
-    question: string;
-    userAnswerContent: string;
-}
+const systemContent = `You are an interview coach doing a mock interview. Try to give feedback for your interviewees responses. 
+
+Respond in a JSON format with objects:
+ "pros" which is a single sentence that contains brief and concise positive feedback.
+"cons" which is an array that contains point-form criticisms. provide two to four points, depending on how bad the response was.
+"grade" which is an int representing an overall grade out of 100. be critical, but still reasonable with the grade.
+"overall" which represents a summary of the feedback.
+{
+    "pros": "",
+    "cons": [],
+    "grade": 0,
+    "overall": ""
+}`;
+
 
 export const InterviewService = {
 
-    async assessInterviewQuestion(payload: InterviewQuestionPayload) {
+    async assessInterviewQuestion(payload: InterviewQuestionSubmissionPayload) {
         // send a request to the OpenAI API and get a response back (stream)
         const stream = await OpenAIStreamService.getCompletionStream({
             model: "gpt-3.5-turbo",
             messages: [
-                { role: "system", content: "You are a helpful assistant that gives feedback about interviewees answers to interview questions for a job as a software engineer." },
+                { role: "system", content: systemContent },
                 { role: "user", content: `
-                Assess and rate this interviewee answer to this question: "${payload.question}"
-                interviewee: "${payload.userAnswerContent}"` }
+                I'm doing an interview and I was asked this question:
+"${payload.question}"
+My answer was:
+"${payload.userAnswerContent}"
+Please grade my answer and give me feedback. Do not provide a summary paragraph and respond in pure JSON.` }
             ],
-            temperature: 0.7,
+            temperature: 0.6,
             top_p: 1,
             frequency_penalty: 0,
             presence_penalty: 0,
-            max_tokens: 100,
+            max_tokens: 250,
             stream: true,
             n: 1,
         });
@@ -57,7 +67,7 @@ export const InterviewService = {
         // TODO: send a request to the OpenAI API and get a response back (stream)
     },
 
-    async saveQuestionToRedis({ stream, ...payload }: { stream: ReadableStream<any> } & InterviewQuestionPayload) {
+    async saveQuestionToRedis({ stream, ...payload }: { stream: ReadableStream<any> } & InterviewQuestionSubmissionPayload) {
         const reader = stream.getReader();
 
         const decoder = new TextDecoder();
