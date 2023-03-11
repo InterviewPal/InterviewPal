@@ -34,3 +34,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#jetbrains
+.idea
+
+#vscode
+.vscode
+
+#mac
+.DS_Store
+
+#linux
+*~
