@@ -3,12 +3,10 @@ import { useEffect, useState } from 'react'
 import ThemeToggle from '@/components/ThemeToggle'
 import HeroText from "@/components/HeroText";
 import Button from "@/components/Button";
-import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 export default function Home() {
-    const [theme, setTheme] = useState(null as 'light' | 'dark' | null);
-    const router = useRouter();
+    const [theme, setTheme] = useState(null as 'light' | 'dark' | null)
 
     useEffect(() => {
         const theme = localStorage.getItem('theme');
@@ -42,23 +40,20 @@ export default function Home() {
         }
     };
 
-
-  return (
-    <>
-      <Head>
-        <title>InterviewPal</title>
-        <meta name="description" content="Interview Practice AI" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main>
-          <ThemeToggle theme={theme} onClick={handleThemeChange} />
-          <HeroText />
-          <div className={"flex justify-center"}>
-            <Button content="Start Now" arrow onClick={() => router.push('/interview')}></Button>
-          </div>
-
-      </main>
-    </>
-  )
+    return (
+        <>
+            <Head>
+                <title>InterviewPal</title>
+                <meta name="description" content="Interview Practice AI" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <main>
+                <ThemeToggle theme={theme} onClick={handleThemeChange} />
+                <h1>
+                    Interview
+                </h1>
+            </main>
+        </>
+    )
 }
