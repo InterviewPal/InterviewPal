@@ -14,12 +14,14 @@ export default function Navbar({ theme, onClick }: NavbarProps) {
                     <Image src="/logo.png" alt="InterviewPal Logo" width={70} height={70} />
                 </Link>
             </div>
-            <div className="flex flex-row items-center justify-end ">
-                <Link className="flex flex-row mr-8 text-xl items-center justify-center text-rosePineDawn-text dark:text-rosePine-text font-display font-semibold" href="/#about">
-                    About
+            <div className="flex flex-row items-center justify-end mr-2">
+                <Link className="flex flex-row mr-8 text-xl items-center justify-center text-rosePineDawn-text dark:text-rosePine-text font-display font-semibold" href="/about">
+                    <span className="hover:bg-rosePineDawn-text/40 dark:hover:bg-rosePine-text/40 rounded-md px-2" style={{ transition: 'all 0.2s ease-in-out' }} >
+                        About
+                    </span>
                 </Link>
                 <ThemeToggle theme={theme} onClick={onClick} />
             </div>
-        </div>
+        </div >
     )
 }
