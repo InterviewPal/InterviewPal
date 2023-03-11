@@ -8,7 +8,7 @@ type ButtonProps = {
 export default function Button({ content, onClick, width, arrow }: ButtonProps) {
     return (
         <button
-            className={["flex font-display font-semibold items-center justify-center h-12 text-rosePineDawn-text dark:text-rosePineMoon-text bg-rosePineDawn-love dark:bg-rosePineMoon-pine rounded-md", width ?? "w-44"].join(" ")}
+            className={["flex font-display text-xl font-semibold items-center justify-center h-14 text-rosePineDawn-text dark:text-rosePine-text bg-rosePine-foam dark:bg-rosePineDawn-love rounded-md", width ?? "w-48"].join(" ")}
             onClick={onClick}
         >
             {content}

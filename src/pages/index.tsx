@@ -4,6 +4,7 @@ import ThemeToggle from '@/components/ThemeToggle'
 import HeroText from "@/components/HeroText";
 import Button from "@/components/Button";
 import { useRouter } from 'next/router'
+import Navbar from "@/components/Navbar";
 import Image from 'next/image'
 
 export default function Home() {
@@ -51,8 +52,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+        <Navbar theme={theme} onClick={handleThemeChange}/>
       <main>
-          <ThemeToggle theme={theme} onClick={handleThemeChange} />
           <HeroText />
           <div className={"flex justify-center"}>
             <Button content="Start Now" arrow onClick={() => router.push('/interview')}></Button>
