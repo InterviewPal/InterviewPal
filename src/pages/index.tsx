@@ -57,7 +57,6 @@ export default function Home() {
           <div className={"flex justify-center"}>
             <Button content="Start Now" arrow onClick={() => router.push('/interview')}></Button>
           </div>
-
       </main>
     </>
   )
