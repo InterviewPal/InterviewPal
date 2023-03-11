@@ -1,11 +1,6 @@
 import {RedisService} from "@/lib/services/redis.service";
 import {v4} from "uuid";
-
-export interface Interview {
-    uuid: string;
-    userUUID: string;
-    createdAt: Date;
-}
+import {Interview} from "@/lib/models/interview.model";
 
 export const InterviewRepository = {
     async createInterview(userUUID: string) {
@@ -23,7 +18,7 @@ export const InterviewRepository = {
 
     async getInterviewById(uuid: string) {
         const interview = await RedisService.redis.hgetall(`interview:${uuid}`);
-        if (interview) {
+        if (Object.keys(interview).length > 0) {
             return interview as unknown as Interview;
         }
         return null;

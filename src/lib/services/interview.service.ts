@@ -1,5 +1,8 @@
 import {RedisService} from "@/lib/services/redis.service";
 import {OpenAIStreamService} from "@/lib/services/openAIStream.service";
+import {InterviewRepository} from "@/lib/repositories/interview.repository";
+import {UserRepository} from "@/lib/repositories/user.repository";
+import {AssessAllInterviewQuestionsPayload} from "@/lib/dtos/assessAllInterviewQuestions.payload";
 
 type questionType = "introductory" | "technical";
 
@@ -11,12 +14,6 @@ interface InterviewQuestionPayload {
     promptNumber: number;
     question: string;
     userAnswerContent: string;
-}
-
-interface InterviewQuestionsPayload {
-    totalQuestions: number;
-    tmpUserUUID: string;
-    interviewUUID: string;
 }
 
 export const InterviewService = {
@@ -53,13 +50,9 @@ export const InterviewService = {
         return stream;
     },
 
-    async assessAllInterviewQuestions(payload: InterviewQuestionsPayload) {
+    async assessAllInterviewQuestions(payload: AssessAllInterviewQuestionsPayload) {
         // get the questions from Redis
-        const questions = [];
-        for (let i = 1; i <= payload.totalQuestions; i++) {
-            const question = await RedisService.redis.hgetall(`user:${payload.tmpUserUUID}:interviewId:${payload.interviewUUID}:${i}`);
-            questions.push(question);
-        }
+        const questions = UserRepository.getInterviewResultsByInterviewUUID(payload);
 
         // TODO: send a request to the OpenAI API and get a response back (stream)
     },

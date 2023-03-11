@@ -10,10 +10,10 @@ interface TmpUser {
 export const IdentityService = {
     async createNewIdentity() {
         const uuid = v4();
-        const success = await RedisService.redis.set(`tmpUser:${uuid}`, JSON.stringify({
+        const success = await RedisService.redis.hmset(`tmpUser:${uuid}`, {
             uuid,
             name: "Anonymous",
-        } satisfies TmpUser));
+        } satisfies TmpUser);
         if (success) {
             return uuid;
         }
@@ -21,9 +21,9 @@ export const IdentityService = {
     },
 
     async getIdentity({ uuid }: { uuid: string }) {
-        const tmpUser = await RedisService.redis.get(`tmpUser:${uuid}`);
-        if (tmpUser) {
-            return JSON.parse(tmpUser) as TmpUser;
+        const tmpUser = await RedisService.redis.hgetall(`tmpUser:${uuid}`);
+        if (Object.keys(tmpUser).length > 0) {
+            return tmpUser as unknown as TmpUser;
         }
         return null;
     },
