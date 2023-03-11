@@ -1,5 +1,6 @@
 import { v4 } from "uuid";
 import {RedisService} from "@/lib/services/redis.service";
+import {NextApiRequest, NextApiResponse} from "next";
 
 interface TmpUser {
     uuid: string;
@@ -25,5 +26,22 @@ export const IdentityService = {
             return JSON.parse(tmpUser);
         }
         return null;
+    },
+
+    async authorizeSession(req: NextApiRequest) {
+        // get the auth token from the request bearer header
+        const tokenUUID = req.headers.authorization?.split(" ")[1] ?? "";
+        if (tokenUUID === "") {
+            // if the token is not present, return 401
+            return null;
+        }
+
+        const user = await IdentityService.getIdentity({ uuid: tokenUUID });
+        if (user) {
+            return user;
+        } else {
+            // if the token is not valid, return 401
+            return null;
+        }
     },
 };
