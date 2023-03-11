@@ -40,7 +40,7 @@
         "What is Git and how does it work?",
         "Can you explain the concept of responsive web design and why it's important?",
         "Can you describe the process of testing and debugging software?",
-        "What is caching?",
+        "What is caching and can you give an example?",
         "What is the difference between front-end development and a back-end development?",
         "How would you approach debugging a complex piece of code?",
         "What are some challenges you've faced when building web applications?",
@@ -48,15 +48,15 @@
         "What is the difference between a class and an object?",
         "Describe your experience with database management and design.",
         "Can you describe a particularly challenging problem you solved?",
-        "Can you explain the concept of recursion and give an example?",
+        "Can you explain recursion and provide an example?",
         "What is Big O notation and why is it important?",
         "What is an algorithm, and can you give an example of one?",
-        "Can you explain one of the fundamental concepts of object-oriented programming?",
+        "Can you explain one of the fundamental concepts of object-oriented programming (Encapsulation, Abstraction, Inheritance, Polymorphism)?",
         "What is an API and could you give an example of one?",
         "What is the difference between a stack and a queue?",
         "What is a pointer and how does it work?",
-        "How does a hash table work?",
+        "What is a hash table and how does it work?",
         "What is the difference between synchronous and asynchronous programming?",
-        "How do you ensure the performance and scalability of your code?"
+        "How can you ensure performance and scalability of your code?"
     ]
 }
