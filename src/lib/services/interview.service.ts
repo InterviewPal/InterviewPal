@@ -7,9 +7,16 @@ type questionType = "introductory" | "technical";
 
 interface InterviewQuestionPayload {
     tmpUserUUID: string;
+    interviewUUID: string;
     promptNumber: number;
     question: string;
     userAnswerContent: string;
+}
+
+interface InterviewQuestionsPayload {
+    totalQuestions: number;
+    tmpUserUUID: string;
+    interviewUUID: string;
 }
 
 export const InterviewService = {
@@ -33,9 +40,8 @@ export const InterviewService = {
             n: 1,
         });
 
-        // store the response in Redis (key: [uuid:<number of question (int)>], value: hashset -> {question: <question>, userAnswer: <userAnswer>})
-        // i.e key: uuid:1 ; value:  {question: "What is your name?", userAnswer: "My name is John"}
-        this.saveToRedis({ stream, ...payload })
+        // store the response in Redis
+        this.saveQuestionToRedis({ stream, ...payload })
             .then((result) => {
                 if (result) {
                     console.log("Successfully saved to Redis");
@@ -47,7 +53,18 @@ export const InterviewService = {
         return stream;
     },
 
-    async saveToRedis({ stream, ...payload }: { stream: ReadableStream<any> } & InterviewQuestionPayload) {
+    async assessAllInterviewQuestions(payload: InterviewQuestionsPayload) {
+        // get the questions from Redis
+        const questions = [];
+        for (let i = 1; i <= payload.totalQuestions; i++) {
+            const question = await RedisService.redis.hgetall(`user:${payload.tmpUserUUID}:interviewId:${payload.interviewUUID}:${i}`);
+            questions.push(question);
+        }
+
+        // TODO: send a request to the OpenAI API and get a response back (stream)
+    },
+
+    async saveQuestionToRedis({ stream, ...payload }: { stream: ReadableStream<any> } & InterviewQuestionPayload) {
         const reader = stream.getReader();
 
         const decoder = new TextDecoder();
@@ -64,11 +81,13 @@ export const InterviewService = {
         console.log("answer: ", answer);
 
         const result = {
+            userId: payload.tmpUserUUID,
+            interviewId: payload.interviewUUID,
             question: payload.question,
             userAnswer: payload.userAnswerContent,
             systemAnswer: answer,
         };
 
-        return RedisService.redis.hmset(`${payload.tmpUserUUID}:${payload.promptNumber}`, result);
+        return RedisService.redis.hmset(`user:${payload.tmpUserUUID}:interviewId:${payload.interviewUUID}:${payload.promptNumber}`, result);
     }
 };

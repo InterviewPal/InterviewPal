@@ -23,7 +23,7 @@ export const IdentityService = {
     async getIdentity({ uuid }: { uuid: string }) {
         const tmpUser = await RedisService.redis.get(`tmpUser:${uuid}`);
         if (tmpUser) {
-            return JSON.parse(tmpUser);
+            return JSON.parse(tmpUser) as TmpUser;
         }
         return null;
     },
