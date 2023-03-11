@@ -16,7 +16,7 @@ export default function Navbar({ theme, onClick }: NavbarProps) {
             </div>
             <div className="flex flex-row items-center justify-end mr-2">
                 <Link className="flex flex-row mr-8 text-xl items-center justify-center text-rosePineDawn-text dark:text-rosePine-text font-display font-semibold" href="/about">
-                    <span className="hover:bg-rosePineDawn-text/40 dark:hover:bg-rosePine-text/40 rounded-md px-2" style={{ transition: 'all 0.2s ease-in-out' }} >
+                    <span className="hover:bg-rosePineDawn-text/40 dark:hover:bg-rosePine-text/40 rounded-md px-2 py-2" style={{ transition: 'all 0.2s ease-in-out' }} >
                         About
                     </span>
                 </Link>
