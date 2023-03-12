@@ -30,17 +30,17 @@ export default function Home() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (currentQuestionIndex === null) {
+        if (currentQuestionIndex === null || interview === null || userTmpUuid === null) {
             console.error('currentQuestionIndex is null');
             return;
         }
 
         InterviewService.submitOneQuestion({
-            tmpUserUUID: userTmpUuid!,
-            interviewUUID: '',
+            tmpUserUUID: userTmpUuid,
+            interviewUUID: interview.uuid,
             promptNumber: currentQuestionIndex + 1,
-            question: '',
-            userAnswerContent: '',
+            question: questions[currentQuestionIndex],
+            userAnswerContent: answer,
         }).then((res) => {
             // ignore the response for now
         }).catch(console.error);
