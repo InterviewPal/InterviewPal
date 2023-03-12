@@ -10,6 +10,7 @@ import * as InterviewService from "@/lib/client/services/interview.service";
 import {useInterview} from "@/lib/client/hooks/useInterview";
 import ChatBubble from "@/components/ChatBubble";
 import {useChatRoomHelpers} from "@/lib/client/hooks/useChatRoomHelpers";
+import {ResultBox} from "@/components/ResultBox";
 
 export default function Home() {
     const router = useRouter();
@@ -32,7 +33,7 @@ export default function Home() {
         if (isDone && questions.length > 0) {
             setCurrentQuestionIndex(0);
             setChatBubbles([
-                {inverted: false, content: "Hi, I'm a recruiter from Google. I'm going to ask you a few questions about your experience with asynchronous programming. Please answer as best as you can. I'll give you feedback on your answers."},
+                {inverted: false, content: "Hi, I'm a recruiter. I'm going to ask you a few general questions. Please answer as best as you can. I'll give you feedback on your answers either at the end or during the interview."},
                 {inverted: false, content: questions[0]},
             ]);
         }
@@ -104,10 +105,11 @@ export default function Home() {
                                     <ChatBubble key={index} inverted={bubble.inverted} text={bubble.content}/>
                                 ))
                             }
-                            {/*<ChatBubble text={text} />*/}
-                            {/*<ChatBubble inverted text={text} />*/}
-                            {/*<ChatBubble inverted text={text} />*/}
-                            {/*<ChatBubble  text={text} />*/}
+                            <ChatBubble text={"text"} />
+                            {/*<ResultBox />*/}
+                            <ChatBubble inverted text={"text"} />
+                            <ChatBubble inverted text={"text"} />
+                            <ChatBubble  text={"text"} />
                         </div>
                         {/* Imput Area */}
                         <div className="bottom-0 left-0 w-full">
