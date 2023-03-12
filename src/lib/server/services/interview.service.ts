@@ -41,13 +41,13 @@ export const InterviewService = {
 "${payload.question}"
 My answer was:
 "${payload.userAnswerContent}"
-Please grade my answer and give me feedback. Do not provide a summary paragraph and respond in pure JSON parsable by JSON.parse in JavaScript.` }
+Please grade my answer and give me feedback. Do not provide a summary paragraph and respond in pure JSON parsable.` }
             ],
             temperature: 0.6,
             top_p: 1,
             frequency_penalty: 0,
             presence_penalty: 0,
-            max_tokens: 250,
+            max_tokens: 500,
             stream: true,
             n: 1,
         });
