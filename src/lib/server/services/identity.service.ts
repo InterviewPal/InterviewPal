@@ -16,6 +16,7 @@ export const IdentityService = {
         };
         const success = await RedisService.redis.hmset(`tmpUser:${uuid}`, user);
         if (success) {
+            await RedisService.redis.expire(`tmpUser:${uuid}`, 60 * 60)
             return user;
         }
         return null;
