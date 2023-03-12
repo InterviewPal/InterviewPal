@@ -51,12 +51,46 @@
         "Can you explain recursion and provide an example?",
         "What is Big O notation and why is it important?",
         "What is an algorithm, and can you give an example of one?",
-        "Can you explain one of the fundamental concepts of object-oriented programming (Encapsulation, Abstraction, Inheritance, Polymorphism)?",
+        "Explain any of the four fundamental concepts of object-oriented programming.",
         "What is an API and could you give an example of one?",
         "What is the difference between a stack and a queue?",
         "What is a pointer and how does it work?",
         "What is a hash table and how does it work?",
         "What is the difference between synchronous and asynchronous programming?",
         "How can you ensure performance and scalability of your code?"
+    ],
+    "webDevQuestions": [
+        "What is an API and could you give an example of one?",
+        "Can you explain why responsiveness and accessibility are important in web development?",
+        "What is server-side rendering and why is it important?",
+        "What are some pros and cons of hydration?",
+        "What are some methods you can optimize a website's performance?",
+        "Explain the concept of edge computing.",
+        "How does serverless computing work?"
+    ],
+    "backendDevQuestions": [
+        "How do you handle security concerns in backend development, such as protecting against SQL injection attacks or cross-site scripting (XSS)?",
+        "Can you describe the design and use of microservices?",
+        "Explain the usage and process of load testing.",
+        "How do you handle data storage and retrieval in distributed systems?",
+        "What is the difference between garbage collection and manual memory management?",
+        "What is a runtime system and what are some features of one?"
+    ],
+    "devOpsQuestions": [
+        "What is the difference between a load balancer and a reverse proxy?",
+        "Explain continuous integration and continuous delivery.",
+        "What is the purpose of a CDN?",
+        "What is IaC and how does it work?",
+        "What is containerization and how does it work?",
+        "What are the advantages of using cloud platforms to host, deploy, and scale applications?",
+        "How can you ensure high availability and disaster recovery for your applications?"
+    ],
+    "dataScienceQuestions": [
+        "What is the difference between supervised and unsupervised learning?",
+        "What is the difference between a regression and a classification problem?",
+        "What are some ways to evaluate the performance of a machine learning model?",
+        "Explain overfitting and ways you can prevent it.",
+        "Explain the concept of big data.",
+        "What is deep learning and how does it differ from traditional machine learning?"
     ]
 }
