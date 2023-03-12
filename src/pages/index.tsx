@@ -7,9 +7,13 @@ import GithubLink from '@/components/GithubLink';
 import * as InterviewService from '@/lib/client/services/interview.service';
 import {InterviewType} from "@/lib/shared/models/interview.models";
 import {useState} from "react";
+import {useTmpAuth} from "@/lib/client/hooks/useTmpAuth";
+import {Loading} from "@/components/Loading";
 
 export default function Home() {
     const router = useRouter();
+
+    const {isAuthed, userTmpUuid} = useTmpAuth({});
 
     const [isMutating, setIsMutating] = useState(false);
 
@@ -22,6 +26,10 @@ export default function Home() {
         }
         router.push(`/interview/${interview.uuid}`);
     };
+
+    if (!isAuthed) {
+        return <Loading />;
+    }
 
     return (
         <>

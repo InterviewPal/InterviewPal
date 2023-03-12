@@ -6,12 +6,13 @@ import { useQuestions } from "@/lib/client/hooks/useQuestions";
 import { useRouter } from "next/router";
 import { Loading } from "@/components/Loading";
 import { useTmpAuth } from "@/lib/client/hooks/useTmpAuth";
+import * as InterviewService from "@/lib/client/services/interview.service";
 
 export default function Home() {
     const router = useRouter();
     const { interviewId } = router.query;
 
-    const { isAuthed, uuid } = useTmpAuth({});
+    const { isAuthed, userTmpUuid } = useTmpAuth({});
     const { isDone, questions, notFound } = useQuestions({ interviewId: interviewId as string });
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<null | number>(null)
@@ -25,9 +26,24 @@ export default function Home() {
         }
     }, [isDone]);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log();
+        if (currentQuestionIndex === null) {
+            console.error('currentQuestionIndex is null');
+            return;
+        }
+
+        InterviewService.submitOneQuestion({
+            tmpUserUUID: userTmpUuid!,
+            interviewUUID: '',
+            promptNumber: currentQuestionIndex + 1,
+            question: '',
+            userAnswerContent: '',
+        }).then((res) => {
+           // ignore the response for now
+        }).catch(console.error);
+
+        console.log(answer, answerLength, currentQuestionIndex, questions[currentQuestionIndex ?? -1]);
     }
 
     if (notFound) {
@@ -60,7 +76,6 @@ export default function Home() {
                                             const element = event.target as HTMLTextAreaElement;
                                             element.style.height = "5px";
                                             element.style.height = (element.scrollHeight + 5) + "px";
-
                                         }}
                                         onChange={(event) => {
                                             const element = event.target as HTMLTextAreaElement;

@@ -30,5 +30,5 @@ export function useTmpAuth({}: HookProps) {
         })();
     }, []);
 
-    return {uuid, isAuthed};
+    return {userTmpUuid: uuid, isAuthed};
 }
