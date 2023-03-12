@@ -2,9 +2,9 @@ import {NextApiRequest, NextApiResponse} from "next";
 import {InterviewRepository} from "@/lib/server/repositories/interview.repository";
 import {ErrorDto} from "@/lib/shared/dtos/error.dto";
 import {IdentityService} from "@/lib/server/services/identity.service";
-import {Interview} from "@/lib/shared/models/interview.model";
 import {z} from "zod";
 import {CreateInterviewPayload} from "@/lib/shared/dtos/createInterview.payload";
+import {Interview} from "@/lib/shared/models/interview.models";
 
 export default async function handler(
     req: NextApiRequest,

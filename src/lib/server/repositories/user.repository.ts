@@ -1,5 +1,5 @@
 import {RedisService} from "@/lib/server/services/redis.service";
-import {InterviewQuestion} from "@/lib/shared/models/interviewQuestion.model";
+import {InterviewQuestion} from "@/lib/shared/models/interview.models";
 
 export const UserRepository = {
     async getInterviewResultsByInterviewUUID({tmpUserUUID, interviewUUID}:{tmpUserUUID: string, interviewUUID: string}): Promise<InterviewQuestion[]> {
