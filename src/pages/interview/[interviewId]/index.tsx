@@ -30,6 +30,7 @@ export default function Home() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log(answer, answerLength, currentQuestionIndex, questions[currentQuestionIndex ?? -1]);
         if (currentQuestionIndex === null || interview === null || userTmpUuid === null) {
             console.error('currentQuestionIndex is null');
             return;
@@ -45,8 +46,17 @@ export default function Home() {
             // ignore the response for now
         }).catch(console.error);
 
-        console.log(answer, answerLength, currentQuestionIndex, questions[currentQuestionIndex ?? -1]);
-    }
+        if (currentQuestionIndex + 1 < questions.length) {
+            // reset the inputs and move to the next question
+            setCurrentQuestionIndex(prev => prev! + 1);
+            setAnswer('');
+            setAnswerLength(0);
+            return;
+        }
+
+        // we are done with the interview
+        router.push(`/interview/${interview.uuid}/results`);
+    };
 
     if (isFetchingInterviewDone && interview === null) {
         router.push('/404');
