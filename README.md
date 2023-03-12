@@ -26,7 +26,7 @@
   <a href="https://github.com/InterviewPal/InterviewPal">
     <img src="public/logo.png" alt="Logo" width="300" height="300">
   </a>
-<h2 align="center">InterviewPal</h3>
+<h1 align="center">InterviewPal</h3>
   <p align="center">
     InterviewPal is a GPT-3.5 powered AI that helps you practice for your interviews. It will ask you common and relevant interview questions and give you insightful feedback on your answers.
     <br />
@@ -67,7 +67,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+  <a href="https://www.youtube.com/watch?v=wd6c250FvGkl">
+    <img src="public/frontpage.png" alt="Logo" width="800" height="400">
+  </a>
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -76,10 +78,12 @@
 
 ## Built With
 
- [![Next][Next.js]][Next-url]
- [![React][React.js]][React-url]
+ [![Next][Next.js]][Next-url] 
+ [![React][React.js]][React-url] \
  [![Tailwind][Tailwind.css]][Tailwind-url]
- [![Vercel][Vercel]][Vercel-url]
+ [![Vercel][Vercel]][Vercel-url] \
+ [![RosePine][RosePine]][RosePine-url]
+ [![GPT-3.5][GPT-3.5]][GPT-3.5-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -125,18 +129,9 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
+</br>
 <!-- ACKNOWLEDGMENTS -->
+
 ## Acknowledgments
 
 * [Jessie Zhong](https://github.com/token03)
@@ -147,6 +142,12 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
@@ -159,3 +160,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 [Tailwind-url]: https://tailwindcss.com/
 [Vercel]: https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white
 [Vercel-url]: https://vercel.com/
+[RosePine]: https://img.shields.io/badge/RosePine-26233a?style=for-the-badge&logo=rosepine&logoColor=purple
+[RosePine-url]: https://rosepine.com/
+[GPT-3.5]: https://img.shields.io/badge/GPT--3-31748f?style=for-the-badge&logo=gpt3&logoColor=white
+[GPT-3.5-url]: https://openai.com/blog/openai-api/
