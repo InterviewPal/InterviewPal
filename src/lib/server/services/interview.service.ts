@@ -41,7 +41,7 @@ export const InterviewService = {
 "${payload.question}"
 My answer was:
 "${payload.userAnswerContent}"
-Please grade my answer and give me feedback. Do not provide a summary paragraph and respond in pure JSON parsable.` }
+Please grade my answer and give me feedback. Do not leave pros and cons array empty. Do not provide a summary paragraph and respond in pure JSON parsable.` }
             ],
             temperature: 0.6,
             top_p: 1,
