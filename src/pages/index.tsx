@@ -32,7 +32,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar logo />
-            <main className="text-rosePineDawn-text dark:text-rosePineMoon-text pt-24">
+            <main className="text-rosePineDawn-text dark:text-rosePine-text pt-24">
                 <div className="flex flex-col items-center justify-center py-24 xl:py-44">
                     <HeroText />
                     <div className="flex justify-center mt-12">
@@ -44,7 +44,7 @@ export default function Home() {
                     <p className="text-xl text-center">InterviewPal is an AI that helps you practice for your interviews. It will ask you questions and give you feedback on your answers.</p>
                 </div>
                 <div className="flex flex-col items-center justify-center py-12 xl:py-24">
-                    <hr className="border-rosePineDawn-text dark:border-rosePineMoon-text w-5/6 border-2 mt-3" />
+                    <hr className="border-rosePineDawn-text dark:border-rosePine-text w-5/6 border-2 mt-3" />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 mx-auto w-5/6">
                     <h2 className="text-4xl font-bold text-center flex justify-center pt-6" id="about">Why we made InterviewPal</h2>

@@ -6,7 +6,7 @@ type ThemeToggleProps = {
 export default function ThemeToggle({ theme, onClick }: ThemeToggleProps) {
     return (
         <button
-            className="flex items-center justify-center w-8 h-8 text-rosePineDawn-text dark:text-rosePineMoon-text bg-rosePineDawn-base dark:bg-rosePineMoon-base rounded-full"
+            className="flex items-center justify-center w-8 h-8 text-rosePineDawn-text dark:text-rosePine-text bg-rosePineDawn-base dark:bg-rosePine-base rounded-full"
             onClick={onClick}
         >
             {theme === 'light' ? (
