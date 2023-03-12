@@ -1,9 +1,9 @@
-import {RedisService} from "@/lib/services/redis.service";
-import {OpenAIStreamService} from "@/lib/services/openAIStream.service";
-import {InterviewRepository} from "@/lib/repositories/interview.repository";
-import {UserRepository} from "@/lib/repositories/user.repository";
-import {AssessAllInterviewQuestionsPayload, InterviewQuestionSubmissionPayload} from "@/lib/dtos";
-import {InterviewQuestion} from "@/lib/models/interviewQuestion.model";
+import {RedisService} from "@/lib/server/services/redis.service";
+import {OpenAIStreamService} from "@/lib/server/services/openAIStream.service";
+import {InterviewRepository} from "@/lib/server/repositories/interview.repository";
+import {UserRepository} from "@/lib/server/repositories/user.repository";
+import {AssessAllInterviewQuestionsPayload, InterviewQuestionSubmissionPayload} from "@/lib/shared/dtos";
+import {InterviewQuestion} from "@/lib/shared/models/interviewQuestion.model";
 
 type questionType = "introductory" | "technical";
 

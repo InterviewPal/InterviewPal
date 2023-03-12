@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {ErrorDto} from "@/lib/dtos/error.dto";
-import {IdentityService} from "@/lib/services/identity.service";
-import {InterviewService} from "@/lib/services/interview.service";
-import {InterviewQuestionSubmissionPayload} from "@/lib/dtos";
+import {ErrorDto} from "@/lib/shared/dtos/error.dto";
+import {IdentityService} from "@/lib/server/services/identity.service";
+import {InterviewService} from "@/lib/server/services/interview.service";
+import {InterviewQuestionSubmissionPayload} from "@/lib/shared/dtos";
 import { z } from "zod";
 
 // asks chatGPT to give feedback and then sends back the feedback as stream. The stream is then saved in Redis as well (async and ignored so Redis won't block the thread).

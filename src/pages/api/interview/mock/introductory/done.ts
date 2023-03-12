@@ -1,8 +1,8 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {AssessAllInterviewQuestionsPayload, ErrorDto, InterviewQuestionSubmissionPayload} from "@/lib/dtos";
-import {IdentityService} from "@/lib/services/identity.service";
+import {AssessAllInterviewQuestionsPayload, ErrorDto, InterviewQuestionSubmissionPayload} from "@/lib/shared/dtos";
+import {IdentityService} from "@/lib/server/services/identity.service";
 import {z} from "zod";
-import {InterviewService} from "@/lib/services/interview.service";
+import {InterviewService} from "@/lib/server/services/interview.service";
 
 // asks chatGPT to give an overall feedback of the full interview Q and A and then sends back the feedback as stream.
 export default async function handler(

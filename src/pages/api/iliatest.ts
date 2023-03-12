@@ -1,8 +1,8 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {InterviewService} from "@/lib/services/interview.service";
-import {InterviewRepository} from "@/lib/repositories/interview.repository";
-import {IdentityService} from "@/lib/services/identity.service";
-import {UserRepository} from "@/lib/repositories/user.repository";
+import {InterviewService} from "@/lib/server/services/interview.service";
+import {InterviewRepository} from "@/lib/server/repositories/interview.repository";
+import {IdentityService} from "@/lib/server/services/identity.service";
+import {UserRepository} from "@/lib/server/repositories/user.repository";
 
 export default async function handler(
     req: NextApiRequest,

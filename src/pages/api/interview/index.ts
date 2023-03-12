@@ -1,7 +1,7 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {Interview, InterviewRepository} from "@/lib/repositories/interview.repository";
-import {ErrorDto} from "@/lib/dtos/error.dto";
-import {IdentityService} from "@/lib/services/identity.service";
+import {Interview, InterviewRepository} from "@/lib/server/repositories/interview.repository";
+import {ErrorDto} from "@/lib/shared/dtos/error.dto";
+import {IdentityService} from "@/lib/server/services/identity.service";
 
 export default async function handler(
     req: NextApiRequest,

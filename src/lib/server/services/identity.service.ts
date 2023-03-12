@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import {RedisService} from "@/lib/services/redis.service";
+import {RedisService} from "@/lib/server/services/redis.service";
 import {NextApiRequest, NextApiResponse} from "next";
 
 interface TmpUser {

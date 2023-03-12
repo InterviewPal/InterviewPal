@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {IdentityService} from "@/lib/services/identity.service";
-import {ErrorDto} from "@/lib/dtos/error.dto";
+import {IdentityService} from "@/lib/server/services/identity.service";
+import {ErrorDto} from "@/lib/shared/dtos/error.dto";
 
 type ResponseData = {
     uuid: string
