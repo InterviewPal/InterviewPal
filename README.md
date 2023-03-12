@@ -24,7 +24,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/InterviewPal/InterviewPal">
-    <img src="public/logo.png" alt="Logo" width="500" height="80">
+    <img src="public/logo.png" alt="Logo" width="300" height="200">
   </a>
 <h2 align="center">InterviewPal</h3>
   <p align="center">
@@ -76,10 +76,10 @@
 
 ## Built With
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Tailwind][Tailwind.css]][Tailwind-url]
-* [![Vercel][Vercel]][Vercel-url]
+ [![Next][Next.js]][Next-url]
+ [![React][React.js]][React-url]
+ [![Tailwind][Tailwind.css]][Tailwind-url]
+ [![Vercel][Vercel]][Vercel-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
