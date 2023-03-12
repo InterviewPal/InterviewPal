@@ -4,11 +4,12 @@ import {IdentityService} from "@/lib/server/services/identity.service";
 import {InterviewService} from "@/lib/server/services/interview.service";
 import {InterviewQuestionSubmissionPayload} from "@/lib/shared/dtos";
 import { z } from "zod";
+import {ChatgptAnswer} from "@/lib/shared/models/chatgptAnswer.model";
 
 // asks chatGPT to give feedback and then sends back the feedback as stream. The stream is then saved in Redis as well (async and ignored so Redis won't block the thread).
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<ErrorDto>
+    res: NextApiResponse<ChatgptAnswer | ErrorDto>
 ) {
     // Authorize the user and return 401 if not authorized.
     const user = await IdentityService.authorizeSession(req);
@@ -25,8 +26,12 @@ export default async function handler(
     }
 
     // stream chunguses
-    const stream = await InterviewService.assessInterviewQuestion(payload);
-    return new Response(stream);
+    // const stream = await InterviewService.assessInterviewQuestion(payload);
+    // return stream.pipe(res);
+
+    const answer = await InterviewService.assessInterviewQuestion(payload);
+    console.log("answer", answer)
+    res.status(200).json(JSON.parse(answer) as ChatgptAnswer);
 }
 
 function inputValidator(payload: unknown): InterviewQuestionSubmissionPayload | null {

@@ -59,10 +59,12 @@ export async function submitOneQuestion(payload: InterviewQuestionSubmissionPayl
     }
 
     // This data is a ReadableStream
-    const data = response.body;
-    if (!data) return;
+    // const data = response.body;
+    // if (!data) return;
+    //
+    // return data;
 
-    return data;
+    return response.json();
 }
 
 export async function getOverallAnswer(payload: AssessAllInterviewQuestionsPayload) {

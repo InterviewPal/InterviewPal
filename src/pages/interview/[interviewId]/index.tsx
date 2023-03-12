@@ -43,7 +43,7 @@ export default function Home() {
             question: questions[currentQuestionIndex],
             userAnswerContent: answer,
         }).then((res) => {
-            // ignore the response for now
+            console.log('submitted question - response: ', res);
         }).catch(console.error);
 
         if (currentQuestionIndex + 1 < questions.length) {

@@ -3,6 +3,7 @@ import {OpenAIStreamService} from "@/lib/server/services/openAIStream.service";
 import {UserRepository} from "@/lib/server/repositories/user.repository";
 import {AssessAllInterviewQuestionsPayload, InterviewQuestionSubmissionPayload} from "@/lib/shared/dtos";
 import {InterviewQuestion} from "@/lib/shared/models/interview.models";
+import str from 'string-to-stream';
 
 type questionType = "introductory" | "technical";
 
@@ -51,16 +52,10 @@ Please grade my answer and give me feedback. Do not provide a summary paragraph 
         });
 
         // store the response in Redis
-        this.saveQuestionToRedis({ stream, ...payload })
-            .then((result) => {
-                if (result) {
-                    console.log("Successfully saved to Redis");
-                } else {
-                    console.log("Failed to save to Redis ⚠️");
-                }
-            }).catch(console.error);
+        const answer = await this.saveQuestionToRedis({ stream, ...payload })
 
-        return stream;
+        // return str(answer);
+        return answer;
     },
 
     async assessAllInterviewQuestions(payload: AssessAllInterviewQuestionsPayload) {
@@ -125,6 +120,10 @@ Please grade my answer and give me feedback. Do not provide a summary paragraph 
             systemAnswer: answer,
         };
 
-        return RedisService.redis.hmset(`user:${payload.tmpUserUUID}:interviewId:${payload.interviewUUID}:${payload.promptNumber}`, result);
+        const redisSuccess = await RedisService.redis.hmset(`user:${payload.tmpUserUUID}:interviewId:${payload.interviewUUID}:${payload.promptNumber}`, result);
+        if (redisSuccess !== "OK") {
+            console.error("Failed to save to Redis ⚠️");
+        }
+        return answer;
     }
 };
