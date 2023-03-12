@@ -68,7 +68,7 @@
 ## About The Project
 
   <a href="https://www.youtube.com/watch?v=wd6c250FvGkl">
-    <img src="public/frontpage.png" alt="Logo" width="800" height="400">
+    <img src="public/frontpage.png" alt="Logo" width="800" height="450">
   </a>
 
 
@@ -113,6 +113,13 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+Remember to create a `.env.local` file in the root of the project and add the following environment variables:
+
+```
+OPENAI_API_KEY="insert-your-key-here"
+REDIS_URL="insert-your-url-here"
+```
 
 ### Learn More
 
