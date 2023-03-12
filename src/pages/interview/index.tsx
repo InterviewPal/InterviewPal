@@ -47,9 +47,11 @@ export default function Home() {
             </Head>
             <Navbar theme={theme} onClick={handleThemeChange} />
             <main>
-                <h1>
-                    Interview
-                </h1>
+                {/* 2 wide flex with one element beign 1/5 wide the other being 4/5 wide */}
+                <div className="flex flex-row">
+                    <div className="flex flex-col w-1/5 bg-white"></div>
+                    <div className="flex flex-col w-4/5 bg-red-900"></div>
+                </div>
             </main>
         </>
     )
