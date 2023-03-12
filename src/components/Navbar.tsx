@@ -10,9 +10,9 @@ type NavbarProps = {
 export default function Navbar({ theme, onClick, logo }: NavbarProps) {
     return (
         logo ? (
-        <div className="flex flex-row items-center justify-between w-full px-4 py-4 md:px-24">
+        <div className="flex flex-row items-center justify-between w-full px-4 h-24 md:px-24">
             <div className="flex flex-row items-center justify-start">
-                <Link className="flex flex-row items-center justify-center -p-7 mt-4" href="/">
+                <Link className="flex flex-row items-center justify-center -p-8" href="/">
                     <Image src="/logo.png" alt="InterviewPal Logo" width={70} height={70} />
                 </Link>
             </div>
@@ -26,9 +26,9 @@ export default function Navbar({ theme, onClick, logo }: NavbarProps) {
             </div>
         </div >
         ) : (
-        <div className="flex flex-row items-center justify-between w-full px-4 py-4 md:px-24">
+        <div className="flex flex-row items-center justify-between w-full px-4 h-24 md:px-24">
             <Link href={'/'}>
-                <div className="flex flex-row items-center justify-start text-3xl h-11 mt-2">
+                <div className="flex flex-row items-center justify-start text-3xl">
                     <span className="block text-transparent bg-clip-text bg-gradient-to-br from-rosePineDawn-foam to-rosePine-foam dark:from-rosePine-love dark:to-rosePine-rose">Interview</span>
                     <span className="block text-transparent bg-clip-text bg-gradient-to-br from-rosePine-rose to-rosePineDawn-love dark:from-rosePine-foam dark:to-rosePine-pine">Pal.</span>
                 </div>
