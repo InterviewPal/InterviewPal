@@ -34,8 +34,8 @@ export function ResultBox({ result }: Props) {
                     </div>
                 </div>
                 <div className={`flex justify-center items-center w-full m-3 md:w-2/12`}>
-                    <div className="flex justify-center items-center w-32 h-32 md:w-20 md:h-20 shrink-0 grow-0 rounded-full bg-rosePineDawn-foam dark:bg-rosePine-foam text-green-700 border border-8 border-rosePineDawn-pine dark:border-rosePine-pine">
-                        <span className={`text-rosePineDawn-pine dark:text-rosePine-pine`}>{result.grade}%</span>
+                    <div className="flex justify-center items-center w-32 h-32 md:w-20 md:h-20 shrink-0 grow-0 rounded-full bg-rosePine-foam dark:bg-rosePineDawn-foam text-green-700 border border-8 border-rosePine-pine dark:border-rosePineDawn-pine">
+                        <span className={`text-rosePine-pine dark:text-rosePineDawn-pine`}>{result.grade}%</span>
                     </div>
                 </div>
             </div>
