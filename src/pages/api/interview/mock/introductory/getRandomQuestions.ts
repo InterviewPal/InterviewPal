@@ -1,19 +1,17 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {InterviewRepository} from "@/lib/server/repositories/interview.repository";
 import {ErrorDto} from "@/lib/shared/dtos/error.dto";
 import {IdentityService} from "@/lib/server/services/identity.service";
-import {Interview} from "@/lib/shared/models/interview.model";
+import {GetRandomQuestionsPayload} from "@/lib/shared/dtos";
 import {z} from "zod";
-import {CreateInterviewPayload} from "@/lib/shared/dtos/createInterview.payload";
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<Interview | ErrorDto>
+    res: NextApiResponse<string[] | ErrorDto>
 ) {
     const {method} = req;
 
     switch (method) {
-        case 'POST':
+        case 'GET':
             // Authorize the user and return 401 if not authorized.
             const user = await IdentityService.authorizeSession(req);
             if (!user) {
@@ -28,15 +26,7 @@ export default async function handler(
                 return;
             }
 
-            payload.userId = user.uuid;
-
-            const interview = await InterviewRepository.createInterview(payload);
-            if (!interview) {
-                res.status(500).json({ message: 'Internal Server Error' });
-                return;
-            }
-
-            res.status(201).json(interview);
+            res.status(201).json([]);
             break;
         default:
             res.setHeader('Allow', ['POST']);
@@ -45,12 +35,12 @@ export default async function handler(
     }
 }
 
-function inputValidator(payload: unknown): CreateInterviewPayload | null {
-    const createInterviewPayload = z.object({
-
+function inputValidator(payload: unknown): GetRandomQuestionsPayload | null {
+    const getRandomQuestionsPayload = z.object({
+        interviewUUID: z.string(),
     });
 
-    const result = createInterviewPayload.safeParse(payload);
+    const result = getRandomQuestionsPayload.safeParse(payload);
     if (!result.success) {
         return null;
     }

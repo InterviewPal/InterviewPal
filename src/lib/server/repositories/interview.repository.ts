@@ -1,12 +1,13 @@
 import {RedisService} from "@/lib/server/services/redis.service";
 import {v4} from "uuid";
 import {Interview} from "@/lib/shared/models/interview.model";
+import {CreateInterviewPayload} from "@/lib/shared/dtos/createInterview.payload";
 
 export const InterviewRepository = {
-    async createInterview(userUUID: string) {
+    async createInterview(payload: CreateInterviewPayload) {
         const interview: Interview = {
             uuid: v4(),
-            userUUID,
+            userUUID: payload.userId!,
             createdAt: new Date(),
         }
         const success = await RedisService.redis.hmset(`interview:${interview.uuid}`, interview);

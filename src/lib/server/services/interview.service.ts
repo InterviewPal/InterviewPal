@@ -1,6 +1,5 @@
 import {RedisService} from "@/lib/server/services/redis.service";
 import {OpenAIStreamService} from "@/lib/server/services/openAIStream.service";
-import {InterviewRepository} from "@/lib/server/repositories/interview.repository";
 import {UserRepository} from "@/lib/server/repositories/user.repository";
 import {AssessAllInterviewQuestionsPayload, InterviewQuestionSubmissionPayload} from "@/lib/shared/dtos";
 import {InterviewQuestion} from "@/lib/shared/models/interviewQuestion.model";
@@ -102,7 +101,7 @@ Please grade my answer and give me feedback. Do not provide a summary paragraph 
         return stream;
     },
 
-    async saveQuestionToRedis({ stream, ...payload }: { stream: ReadableStream<any> } & InterviewQuestionSubmissionPayload) {
+    async saveQuestionToRedis({ stream, ...payload }: { stream: ReadableStream } & InterviewQuestionSubmissionPayload) {
         const reader = stream.getReader();
 
         const decoder = new TextDecoder();

@@ -1,5 +1,5 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {AssessAllInterviewQuestionsPayload, ErrorDto, InterviewQuestionSubmissionPayload} from "@/lib/shared/dtos";
+import {AssessAllInterviewQuestionsPayload, ErrorDto} from "@/lib/shared/dtos";
 import {IdentityService} from "@/lib/server/services/identity.service";
 import {z} from "zod";
 import {InterviewService} from "@/lib/server/services/interview.service";
