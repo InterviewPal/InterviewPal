@@ -1,88 +1,95 @@
 @tailwind base;
 /* Firefox */
 * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary) var(--secondary);
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--secondary);
 }
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-    width: 4px;
+  width: 4px;
 }
 
 *::-webkit-scrollbar-track {
-    background: var(--secondary);
+  background: var(--secondary);
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: var(--secondary);
-    border: 3px solid var(--primary);
+  background-color: var(--secondary);
+  border: 3px solid var(--primary);
 }
 
 @tailwind components;
 @tailwind utilities;
 
 @font-face {
-    font-family: 'Inter';
-    src: url('/font/Inter.ttf');
+  font-family: "Inter";
+  src: url("/font/Inter.ttf");
 }
 
 @font-face {
-    font-family: 'JetBrains Mono';
-    src: url('/font/JetBrainsMono.ttf');
+  font-family: "JetBrains Mono";
+  src: url("/font/JetBrainsMono.ttf");
 }
 
 @layer components {
-    .speech-bubble {
-        position: relative;
-        background: #00aabb;
-        border-radius: .4em;
-    }
+  .speech-bubble {
+    position: relative;
+    background: #00aabb;
+    border-radius: 0.4em;
+  }
 
-    .speech-bubble-invert {
-        position: relative;
-        background: #00aabb;
-        border-radius: .4em;
-    }
+  .speech-bubble-invert {
+    position: relative;
+    background: #00aabb;
+    border-radius: 0.4em;
+  }
 
-    .speech-bubble:after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 85%;
-        width: 0;
-        height: 0;
-        border: 27px solid transparent;
-        border-right-color: #00aabb;
-        border-left: 0;
-        margin-top: -27px;
-        margin-left: -22px;
-    }
+  .speech-bubble:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 85%;
+    width: 0;
+    height: 0;
+    border: 27px solid transparent;
+    border-right-color: #00aabb;
+    border-left: 0;
+    margin-top: -27px;
+    margin-left: -22px;
+  }
 
-    .speech-bubble-invert:after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 85%;
-        width: 0;
-        height: 0;
-        border: 27px solid transparent;
-        border-left-color: #00aabb;
-        border-right: 0;
-        margin-top: -27px;
-        margin-right: -22px;
-    }
-    #root,
-    #__next {
-        height: 100%;
-    }
-    body,
-    html {
-        height:100%
-    }
+  .speech-bubble-invert:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 85%;
+    width: 0;
+    height: 0;
+    border: 27px solid transparent;
+    border-left-color: #00aabb;
+    border-right: 0;
+    margin-top: -27px;
+    margin-right: -22px;
+  }
+
+  .message-text-area {
+    max-height: 200px;
+    height: 24px;
+    overflow-y: hidden;
+  }
+  
+  #root,
+  #__next {
+    height: 100%;
+  }
+  body,
+  html {
+    height: 100%;
+  }
 }
 
 :root {
-    --primary: #b4637a;
-    --secondary: rgba(0, 0, 0, 0.1);
+  --primary: #b4637a;
+  --secondary: rgba(0, 0, 0, 0.1);
 }
