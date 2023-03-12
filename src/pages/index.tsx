@@ -7,6 +7,7 @@ import GithubLink from '@/components/GithubLink';
 import * as InterviewService from '@/lib/client/services/interview.service';
 import {InterviewType} from "@/lib/shared/models/interview.models";
 import {useState} from "react";
+import Error from "@/components/Error";
 
 export default function Home() {
     const router = useRouter();
