@@ -2,7 +2,7 @@ import {RedisService} from "@/lib/server/services/redis.service";
 import {OpenAIStreamService} from "@/lib/server/services/openAIStream.service";
 import {UserRepository} from "@/lib/server/repositories/user.repository";
 import {AssessAllInterviewQuestionsPayload, InterviewQuestionSubmissionPayload} from "@/lib/shared/dtos";
-import {InterviewQuestion} from "@/lib/shared/models/interviewQuestion.model";
+import {InterviewQuestion} from "@/lib/shared/models/interview.models";
 
 type questionType = "introductory" | "technical";
 

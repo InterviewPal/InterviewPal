@@ -1,6 +1,5 @@
 import questions from '@/data/questions.json';
-
-type InterviewType = 'personalQuestions' | 'technicalQuestions';
+import {InterviewType} from "@/lib/shared/models/interview.models";
 
 export const QuestionService = {
     // fetchs random questions from questions.json file

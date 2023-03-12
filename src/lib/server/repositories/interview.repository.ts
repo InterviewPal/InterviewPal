@@ -1,7 +1,7 @@
 import {RedisService} from "@/lib/server/services/redis.service";
 import {v4} from "uuid";
-import {Interview} from "@/lib/shared/models/interview.model";
 import {CreateInterviewPayload} from "@/lib/shared/dtos/createInterview.payload";
+import {Interview} from "@/lib/shared/models/interview.models";
 
 export const InterviewRepository = {
     async createInterview(payload: CreateInterviewPayload) {

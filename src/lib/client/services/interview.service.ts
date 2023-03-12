@@ -1,6 +1,6 @@
 import {ApiRequestService} from "@/lib/client/services/apiRequest.service";
 import {CreateInterviewPayload} from "@/lib/shared/dtos/createInterview.payload";
-import {Interview} from "@/lib/shared/models/interview.model";
+import {Interview} from "@/lib/shared/models/interview.models";
 
 export async function createInterview() {
     const result = await ApiRequestService.post({
