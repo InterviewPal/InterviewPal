@@ -7,9 +7,12 @@ import { useRouter } from "next/router";
 import { Loading } from "@/components/Loading";
 import { useTmpAuth } from "@/lib/client/hooks/useTmpAuth";
 import * as InterviewService from "@/lib/client/services/interview.service";
-import {useInterview} from "@/lib/client/hooks/useInterview";
+import { useInterview } from "@/lib/client/hooks/useInterview";
+import ChatBubble from "@/components/ChatBubble";
 
 export default function Home() {
+    const text = "Hello, I'm InterviewPal. I'm here to help you practice for your interview.";
+
     const router = useRouter();
     const { interviewId } = router.query;
 
@@ -80,8 +83,8 @@ export default function Home() {
                 <div className="flex h-full flex-1 flex-col md:pl-[360px]">
                     <div className="relative h-full w-full transition-width flex flex-col overflow-hidden items-stretch flex-1">
                         {/* Text Area */}
-                        <div className="flex flex-col flex-1 overflow-y-auto h-full bg-rosePineDawn-surface dark:bg-rosePine-surface">
-
+                        <div className="flex flex-col flex-1 overflow-y-auto h-full mt-24 pt-4 pl-4 bg-rosePineDawn-surface dark:bg-rosePine-surface">
+                            <ChatBubble text={text} />
                         </div>
                         {/* Imput Area */}
                         <div className="absolute bottom-0 left-0 w-full">
