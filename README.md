@@ -24,11 +24,9 @@
 <br />
 <div align="center">
   <a href="https://github.com/InterviewPal/InterviewPal">
-    <img src="public/logo.png" alt="Logo" width="80" height="80">
+    <img src="public/logo.png" alt="Logo" width="500" height="80">
   </a>
-
 <h2 align="center">InterviewPal</h3>
-
   <p align="center">
     InterviewPal is an AI that helps you practice for your interviews. It will ask you questions and give you feedback on your answers.
     <br />
