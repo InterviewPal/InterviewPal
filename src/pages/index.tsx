@@ -1,13 +1,25 @@
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
 import HeroText from "@/components/HeroText";
 import Button from "@/components/Button";
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
 import Navbar from "@/components/Navbar";
 import GithubLink from '@/components/GithubLink';
+import * as InterviewService from '@/lib/client/services/interview.service';
+import {InterviewType} from "@/lib/shared/models/interview.models";
+import {useState} from "react";
 
 export default function Home() {
     const router = useRouter();
+
+    const [isMutating, setIsMutating] = useState(true);
+
+    const handleStart = async () => {
+
+        const interview = await InterviewService.createInterview({type: InterviewType.personalQuestions});
+        if (!interview) {
+
+        }
+    };
 
     return (
         <>
@@ -22,7 +34,7 @@ export default function Home() {
                 <div className="flex flex-col items-center justify-center py-24 xl:py-44">
                     <HeroText />
                     <div className="flex justify-center mt-12">
-                        <Button content="Start Now" arrow onClick={() => router.push('/interview')}></Button>
+                        <Button content="Start Now" arrow onClick={handleStart} isLoading={isMutating} />
                     </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 mx-auto w-5/6">
