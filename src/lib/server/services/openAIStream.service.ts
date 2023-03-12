@@ -44,6 +44,8 @@ export const OpenAIStreamService = {
 
         const res = await this.getFetchedResponse(payload);
 
+        console.log("res", res, res.status)
+
         const stream = new ReadableStream({
             async start(controller) {
                 // callback

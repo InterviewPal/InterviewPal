@@ -13,6 +13,7 @@ import {useChatRoomHelpers} from "@/lib/client/hooks/useChatRoomHelpers";
 import {ResultBox} from "@/components/ResultBox";
 import {getAllInterviewQuestionResults, getOverallAnswer} from "@/lib/client/services/interview.service";
 import {ChatgptAnswer} from "@/lib/shared/models/chatgptAnswer.model";
+import dialogue from "@/data/dialogue.json";
 
 export default function Home() {
     const router = useRouter();
@@ -40,7 +41,7 @@ export default function Home() {
         if (isDone && questions.length > 0) {
             setCurrentQuestionIndex(0);
             setChatBubbles([
-                {inverted: false, content: "Hi, I'm a recruiter. I'm going to ask you a few general questions. Please answer as best as you can. I'll give you feedback on your answers either at the end or during the interview."},
+                {inverted: false, content: dialogue["introduction"][Math.floor(Math.random() * dialogue["introduction"].length)]},
                 {inverted: false, content: questions[0]},
             ]);
         }
@@ -75,6 +76,7 @@ export default function Home() {
             if (!(currentQuestionIndex + 1 < questions.length)) {
                 // we are done with the interview
                 setShouldAskForOverallFeedback(true);
+                setCurrentQuestionIndex(questions.length);
             }
         }).catch(console.error);
 
@@ -85,6 +87,7 @@ export default function Home() {
             setCurrentQuestionIndex(prev => prev! + 1);
             setChatBubbles(prev => [...prev,
                 {inverted: true, content: answer},
+                {inverted: false, content: dialogue["transition"][Math.floor(Math.random() * dialogue["transition"].length)]},
                 {inverted: false, content: questions[currentQuestionIndex + 1]},
             ]);
             return;
@@ -129,6 +132,10 @@ export default function Home() {
                 return newResult;
             });
 
+            setChatBubbles(prev => [...prev,
+                { inverted: false, content: dialogue["end"][Math.floor(Math.random() * dialogue["end"].length)] },
+            ]);
+
             // show the overall result as well
             const overallResult = await InterviewService.getOverallAnswer({
                 interviewUUID: interview.uuid,
@@ -155,7 +162,9 @@ export default function Home() {
             const overallResultJson = JSON.parse(overallResultText) as ChatgptAnswer;
 
             // start showing the overall result at the end too.
-            setChatBubbles(prev => [...prev, overallResultJson]);
+            setChatBubbles(prev => [...prev,
+                overallResultJson,
+            ]);
 
             // clear cache of questions
             localStorage.removeItem('questions');
@@ -246,8 +255,8 @@ export default function Home() {
                         <Image src="/suit-logo.png" alt="hero" width={280} height={280}/>
                         <hr className="border-rosePineDawn-text dark:border-rosePine-text w-5/6 border-2 mt-3"/>
                         <span className="text-4xl font-bold mt-4">
-                            {currentQuestionIndex !== null && questions[currentQuestionIndex]
-                                ? currentQuestionIndex + 1 : 0} / {questions.length}
+                            {currentQuestionIndex !== null
+                                ? currentQuestionIndex : 0} / {questions.length}
                         </span>
                         <p className="text-sm mt-2">
                             Questions Answered

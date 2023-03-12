@@ -13,7 +13,7 @@ export function useInterview(interviewUUID: string) {
             }
 
             const interview = await InterviewService.getInterviewById({interviewUUID});
-            if (interview) {
+            if (interview && interview.isDone == "false") {
                 setInterview(interview);
             }
             setIsDone(true);

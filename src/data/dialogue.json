@@ -1,8 +1,8 @@
 {
     "introduction": [
-        "Hi [Your Name], a pleasure to meet you, I'm InterviewPal, your AI interviewer. I'll be asking you some questions today. Let's get started.",
-        "Nice to meet you [Your Name], I'm InterviewPal, your AI interviewer. I'll be going through an interview with you today. Let's get started.",
-        "Hello [Your Name], I'm InterviewPal, your AI interviewer for today. Today's interview will have some personal and technical questions. Let's get started."
+        "Hi, a pleasure to meet you, I'm InterviewPal, your AI interviewer. I'll be asking you some questions today. Let's get started.",
+        "Nice to meet you, I'm InterviewPal, your AI interviewer. I'll be going through an interview with you today. Let's get started.",
+        "Hello, I'm InterviewPal, your AI interviewer for today. Today's interview will have some personal and technical questions. Let's get started."
     ],
     "transition": [
         "Hmm... Interesting answer. Let's move on to the next question.",
@@ -12,7 +12,7 @@
         "Thank you for your answer. Next question..."
     ],
     "end": [
-        "Great job today [Your Name]. I hope you enjoyed the interview. Let's see your results.",
-        "Thank you for your time today [Your Name]. Let's see your results."
+        "Great job today. I hope you enjoyed the interview. Let's see your results.",
+        "Thank you for your time today. Let's see your results."
     ]
 }

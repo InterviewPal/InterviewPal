@@ -10,6 +10,7 @@ export const InterviewRepository = {
             type: payload.type,
             userUUID: payload.userId!,
             createdAt: new Date(),
+            isDone: "false",
         }
         const success = await RedisService.redis.hmset(`interview:${interview.uuid}`, interview);
         if (success) {
@@ -26,4 +27,13 @@ export const InterviewRepository = {
         }
         return null;
     },
+
+    async saveInterview(interview: Interview) {
+        const success = await RedisService.redis.hmset(`interview:${interview.uuid}`, interview);
+        if (success) {
+            await RedisService.redis.expire(`interview:${interview.uuid}`, 60 * 60)
+            return interview;
+        }
+        return null;
+    }
 };

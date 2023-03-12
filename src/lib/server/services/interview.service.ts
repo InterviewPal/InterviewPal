@@ -4,6 +4,7 @@ import {UserRepository} from "@/lib/server/repositories/user.repository";
 import {AssessAllInterviewQuestionsPayload, InterviewQuestionSubmissionPayload} from "@/lib/shared/dtos";
 import {InterviewQuestion} from "@/lib/shared/models/interview.models";
 import str from 'string-to-stream';
+import {InterviewRepository} from "@/lib/server/repositories/interview.repository";
 
 type questionType = "introductory" | "technical";
 
@@ -40,7 +41,7 @@ export const InterviewService = {
 "${payload.question}"
 My answer was:
 "${payload.userAnswerContent}"
-Please grade my answer and give me feedback. Do not provide a summary paragraph and respond in pure JSON.` }
+Please grade my answer and give me feedback. Do not provide a summary paragraph and respond in pure JSON parsable by JSON.parse in JavaScript.` }
             ],
             temperature: 0.6,
             top_p: 1,
@@ -84,7 +85,7 @@ Please grade my answer and give me feedback. Do not provide a summary paragraph 
                 I had an interview and These are my answers to the questions:
                 ${content}
                 
-Please grade my answer and give me feedback. Do not provide a summary paragraph and respond in pure JSON.` }
+Please grade my answer and give me feedback. Do not provide a summary paragraph and respond in pure JSON parsable by JSON.parse in JavaScript.` }
             ],
             temperature: 0.6,
             top_p: 1,
@@ -96,6 +97,13 @@ Please grade my answer and give me feedback. Do not provide a summary paragraph 
         });
 
         console.log("stream: ", stream)
+
+        const interview = await InterviewRepository.getInterviewById(payload.interviewUUID);
+        if (!interview) throw new Error("Interview not found");
+
+        interview.isDone = "true";
+
+        InterviewRepository.saveInterview(interview)
 
         return stream;
     },

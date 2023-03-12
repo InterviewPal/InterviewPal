@@ -3,6 +3,7 @@ export interface Interview {
     type: InterviewType;
     userUUID: string;
     createdAt: Date;
+    isDone: "false" | "true";
 }
 
 export interface InterviewQuestion {
