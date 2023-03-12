@@ -80,7 +80,6 @@
   .message-text-area {
     max-height: 200px;
     height: 24px;
-    overflow-y: hidden;
   }
 
   #root,
