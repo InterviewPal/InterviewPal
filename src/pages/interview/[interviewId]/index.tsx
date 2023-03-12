@@ -41,7 +41,10 @@ export default function Home() {
         if (isDone && questions.length > 0) {
             setCurrentQuestionIndex(0);
             setChatBubbles([
-                {inverted: false, content: dialogue["introduction"][Math.floor(Math.random() * dialogue["introduction"].length)]},
+                {
+                    inverted: false,
+                    content: dialogue["introduction"][Math.floor(Math.random() * dialogue["introduction"].length)]
+                },
                 {inverted: false, content: questions[0]},
             ]);
         }
@@ -49,7 +52,7 @@ export default function Home() {
 
     useChatRoomHelpers({chatRoomRef, chatBubbles, handleSubmit, currentQuestionIndex, answer});
 
-    async function handleSubmit (e?: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(e?: React.FormEvent<HTMLFormElement>) {
         e?.preventDefault();
         if (coolDown) {
             return;
@@ -87,7 +90,10 @@ export default function Home() {
             setCurrentQuestionIndex(prev => prev! + 1);
             setChatBubbles(prev => [...prev,
                 {inverted: true, content: answer},
-                {inverted: false, content: dialogue["transition"][Math.floor(Math.random() * dialogue["transition"].length)]},
+                {
+                    inverted: false,
+                    content: dialogue["transition"][Math.floor(Math.random() * dialogue["transition"].length)]
+                },
                 {inverted: false, content: questions[currentQuestionIndex + 1]},
             ]);
             return;
@@ -96,13 +102,16 @@ export default function Home() {
 
     useEffect(() => {
         (async () => {
-           if (!shouldAskForOverallFeedback) {
-               return;
-           }
-           if (interview === null || userTmpUuid === null) {
+            if (!shouldAskForOverallFeedback) {
+                return;
+            }
+            if (interview === null || userTmpUuid === null) {
                 console.error('interview or userTmpUuid is null');
                 return;
-           }
+            }
+
+            // clear cache of questions
+            localStorage.removeItem('questions');
 
             // scroll to the top
             chatRoomRef.current?.scrollIntoView({behavior: "smooth"});
@@ -133,7 +142,7 @@ export default function Home() {
             });
 
             setChatBubbles(prev => [...prev,
-                { inverted: false, content: dialogue["end"][Math.floor(Math.random() * dialogue["end"].length)] },
+                {inverted: false, content: dialogue["end"][Math.floor(Math.random() * dialogue["end"].length)]},
             ]);
 
             // show the overall result as well
@@ -152,7 +161,7 @@ export default function Home() {
 
             let overallResultText = '';
             while (!done) {
-                const { value, done: doneReading } = await reader.read();
+                const {value, done: doneReading} = await reader.read();
                 done = doneReading;
                 const chunkValue = decoder.decode(value);
                 overallResultText += chunkValue;
@@ -165,9 +174,6 @@ export default function Home() {
             setChatBubbles(prev => [...prev,
                 overallResultJson,
             ]);
-
-            // clear cache of questions
-            localStorage.removeItem('questions');
         })()
     }, [shouldAskForOverallFeedback]);
 
@@ -195,7 +201,7 @@ export default function Home() {
                         className="relative h-full w-full transition-width flex flex-col overflow-hidden items-stretch flex-1">
                         {/* Text Area */}
                         <div ref={chatRoomRef}
-                            className="flex flex-col flex-1 mb-5 rounded-3xl mr-5 overflow-y-auto overflow-x-hidden mt-24 pt-4 pl-4 bg-rosePineDawn-surface dark:bg-rosePine-surface">
+                             className="flex flex-col flex-1 mb-5 rounded-3xl mr-5 overflow-y-auto overflow-x-hidden mt-24 pt-4 pl-4 bg-rosePineDawn-surface dark:bg-rosePine-surface">
                             {
                                 chatBubbles.map((bubble, index) => {
                                     const isResult = bubble.hasOwnProperty('grade');
@@ -203,7 +209,8 @@ export default function Home() {
                                         return <ResultBox key={index} result={bubble as ChatgptAnswer}/>;
                                     } else {
                                         const fckTSfornow = bubble as { inverted: boolean, content: string };
-                                        return <ChatBubble key={index} inverted={fckTSfornow.inverted} text={fckTSfornow.content}/>;
+                                        return <ChatBubble key={index} inverted={fckTSfornow.inverted}
+                                                           text={fckTSfornow.content}/>;
                                     }
                                 })
                             }
