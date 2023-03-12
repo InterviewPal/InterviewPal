@@ -4,7 +4,7 @@ import {ErrorDto} from "@/lib/shared/dtos/error.dto";
 import {IdentityService} from "@/lib/server/services/identity.service";
 import {z} from "zod";
 import {CreateInterviewPayload} from "@/lib/shared/dtos/createInterview.payload";
-import {Interview} from "@/lib/shared/models/interview.models";
+import {Interview, InterviewType} from "@/lib/shared/models/interview.models";
 
 export default async function handler(
     req: NextApiRequest,
@@ -47,7 +47,7 @@ export default async function handler(
 
 function inputValidator(payload: unknown): CreateInterviewPayload | null {
     const createInterviewPayload = z.object({
-
+        type: z.nativeEnum(InterviewType)
     });
 
     const result = createInterviewPayload.safeParse(payload);

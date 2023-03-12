@@ -7,6 +7,7 @@ export const InterviewRepository = {
     async createInterview(payload: CreateInterviewPayload) {
         const interview: Interview = {
             uuid: v4(),
+            type: payload.type,
             userUUID: payload.userId!,
             createdAt: new Date(),
         }

@@ -3,6 +3,8 @@ import {ErrorDto} from "@/lib/shared/dtos/error.dto";
 import {IdentityService} from "@/lib/server/services/identity.service";
 import {GetRandomQuestionsPayload} from "@/lib/shared/dtos";
 import {z} from "zod";
+import {QuestionService} from "@/lib/server/services/questions.service";
+import {InterviewRepository} from "@/lib/server/repositories/interview.repository";
 
 export default async function handler(
     req: NextApiRequest,
@@ -26,7 +28,19 @@ export default async function handler(
                 return;
             }
 
-            res.status(201).json([]);
+            const interview = await InterviewRepository.getInterviewById(payload.interviewUUID);
+            if (!interview) {
+                // interview doesn't exist
+                res.status(404).json({ message: 'Interview does not exist'});
+                return;
+            }
+
+            const questions = await QuestionService.fetchQuestions({
+                interviewType: interview.type ?? 'personalQuestions', // the fallback is just for type safety
+                length: 5,
+            })
+
+            res.status(201).json(questions);
             break;
         default:
             res.setHeader('Allow', ['POST']);

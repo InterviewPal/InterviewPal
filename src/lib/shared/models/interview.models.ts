@@ -1,5 +1,6 @@
 export interface Interview {
     uuid: string;
+    type: InterviewType;
     userUUID: string;
     createdAt: Date;
 }
@@ -12,4 +13,7 @@ export interface InterviewQuestion {
     systemAnswer: string;
 }
 
-export type InterviewType = 'personalQuestions' | 'technicalQuestions';
+export enum InterviewType {
+    personalQuestions = 'personalQuestions',
+    technicalQuestions = 'technicalQuestions',
+}
