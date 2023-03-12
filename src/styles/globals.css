@@ -32,6 +32,48 @@
     src: url('/font/JetBrainsMono.ttf');
 }
 
+@layer components {
+    .speech-bubble {
+        position: relative;
+        background: #00aabb;
+        border-radius: .4em;
+    }
+
+    .speech-bubble-invert {
+        position: relative;
+        background: #00aabb;
+        border-radius: .4em;
+    }
+
+    .speech-bubble:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 85%;
+        width: 0;
+        height: 0;
+        border: 27px solid transparent;
+        border-right-color: #00aabb;
+        border-left: 0;
+        margin-top: -27px;
+        margin-left: -22px;
+    }
+
+    .speech-bubble-invert:after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 85%;
+        width: 0;
+        height: 0;
+        border: 27px solid transparent;
+        border-left-color: #00aabb;
+        border-right: 0;
+        margin-top: -27px;
+        margin-right: -22px;
+    }
+}
+
 :root {
     --primary: #b4637a;
     --secondary: rgba(0, 0, 0, 0.1);
