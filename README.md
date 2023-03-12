@@ -24,11 +24,11 @@
 <br />
 <div align="center">
   <a href="https://github.com/InterviewPal/InterviewPal">
-    <img src="public/logo.png" alt="Logo" width="300" height="200">
+    <img src="public/logo.png" alt="Logo" width="300" height="300">
   </a>
 <h2 align="center">InterviewPal</h3>
   <p align="center">
-    InterviewPal is an AI that helps you practice for your interviews. It will ask you questions and give you feedback on your answers.
+    InterviewPal is a GPT-3.5 powered AI that helps you practice for your interviews. It will ask you common and relevant interview questions and give you insightful feedback on your answers.
     <br />
     <br />
     <a href="https://github.com/InterviewPal/InterviewPal">View Demo</a>
@@ -131,7 +131,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE.md` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
