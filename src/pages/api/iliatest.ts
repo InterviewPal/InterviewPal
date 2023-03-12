@@ -2,6 +2,7 @@ import {NextApiRequest, NextApiResponse} from "next";
 import {InterviewService} from "@/lib/services/interview.service";
 import {InterviewRepository} from "@/lib/repositories/interview.repository";
 import {IdentityService} from "@/lib/services/identity.service";
+import {UserRepository} from "@/lib/repositories/user.repository";
 
 export default async function handler(
     req: NextApiRequest,
@@ -30,6 +31,12 @@ export default async function handler(
 
     const user = await IdentityService.getIdentity({uuid: "d822aae9-4588-42b5-ae70-947851e82944"});
     console.log("user", user);
+
+    const questions = await UserRepository.getInterviewResultsByInterviewUUID({
+        interviewUUID: "a883ee18-9491-43f6-988a-5d6bccea035e",
+        tmpUserUUID: "d822aae9-4588-42b5-ae70-947851e82944"
+    });
+    console.log("questions", questions);
 
     // await InterviewService.assessInterviewQuestion({
     //     tmpUserUUID: "123",

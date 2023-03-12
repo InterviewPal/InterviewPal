@@ -3,6 +3,7 @@ import {OpenAIStreamService} from "@/lib/services/openAIStream.service";
 import {InterviewRepository} from "@/lib/repositories/interview.repository";
 import {UserRepository} from "@/lib/repositories/user.repository";
 import {AssessAllInterviewQuestionsPayload, InterviewQuestionSubmissionPayload} from "@/lib/dtos";
+import {InterviewQuestion} from "@/lib/models/interviewQuestion.model";
 
 type questionType = "introductory" | "technical";
 
@@ -62,9 +63,40 @@ Please grade my answer and give me feedback. Do not provide a summary paragraph 
 
     async assessAllInterviewQuestions(payload: AssessAllInterviewQuestionsPayload) {
         // get the questions from Redis
-        const questions = UserRepository.getInterviewResultsByInterviewUUID(payload);
+        const questions = await UserRepository.getInterviewResultsByInterviewUUID(payload);
 
-        // TODO: send a request to the OpenAI API and get a response back (stream)
+        // send a request to the OpenAI API and get a response back (stream)
+        let content = '';
+        questions.forEach(({question, userAnswer}, i) => {
+            content = content + `
+            Question ${i + 1}:
+            "${question}"
+            Interviewee's answer:
+            "${userAnswer}"
+            
+            `
+        });
+
+        const stream = await OpenAIStreamService.getCompletionStream({
+            model: "gpt-3.5-turbo",
+            messages: [
+                { role: "system", content: systemContent },
+                { role: "user", content: `
+                I had an interview and These are my answers to the questions:
+                ${content}
+                
+Please grade my answer and give me feedback. Do not provide a summary paragraph and respond in pure JSON.` }
+            ],
+            temperature: 0.6,
+            top_p: 1,
+            frequency_penalty: 0,
+            presence_penalty: 0,
+            max_tokens: 1000,
+            stream: true,
+            n: 1,
+        });
+
+        return stream;
     },
 
     async saveQuestionToRedis({ stream, ...payload }: { stream: ReadableStream<any> } & InterviewQuestionSubmissionPayload) {
@@ -83,7 +115,7 @@ Please grade my answer and give me feedback. Do not provide a summary paragraph 
 
         console.log("answer: ", answer);
 
-        const result = {
+        const result: InterviewQuestion = {
             userId: payload.tmpUserUUID,
             interviewId: payload.interviewUUID,
             question: payload.question,
