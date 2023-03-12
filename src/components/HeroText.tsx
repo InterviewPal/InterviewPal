@@ -1,6 +1,6 @@
 export default function HeroText() {
     return (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center w-5/6">
             <h1 className="flex font-display flex-row text-4xl md:text-8xl font-bold text-center text-rosePineDawn-text dark:text-rosePineMoon-text">
                 <span className="block text-transparent bg-clip-text bg-gradient-to-br from-rosePineDawn-foam to-rosePine-foam dark:from-rosePine-love dark:to-rosePine-rose">Interview</span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-br from-rosePine-rose to-rosePineDawn-love dark:from-rosePine-foam dark:to-rosePine-pine">Pal.</span>
