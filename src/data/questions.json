@@ -56,19 +56,24 @@
         "What is a pointer and how does it work?",
         "What is a hash table and how does it work?",
         "What is the difference between synchronous and asynchronous programming?",
-        "How can you ensure performance and scalability of your code?"
+        "How can you ensure performance and scalability of your code?",
+        "What is an API and could you give an example of one?",
+        "What are some methods you can optimize a website's performance?",
+        "What is the purpose of a CDN?",
+        "What is containerization and how does it work?",
+        "What are the pros and cons of cloud computing services like AWS and Azure?",
+        "What are the advantages of using cloud platforms to host, deploy, and scale applications?",
+        "Explain the concept of big data.",
+        "Explain the concept of edge computing.",
+        "How does serverless computing work?"
     ],
     "technicalQuestions": [
         "SEPARATOR",
         { 
             "webDevQuestions": [
-                "What is an API and could you give an example of one?",
                 "Can you explain why responsiveness and accessibility are important in web development?",
                 "What is server-side rendering and why is it important?",
-                "What are some pros and cons of hydration?",
-                "What are some methods you can optimize a website's performance?",
-                "Explain the concept of edge computing.",
-                "How does serverless computing work?"
+                "What are some pros and cons of hydration?"
             ],
             "backendDevQuestions": [
                 "How do you handle security concerns in backend development, such as protecting against SQL injection attacks or cross-site scripting (XSS)?",
@@ -81,10 +86,7 @@
             "devOpsQuestions": [
                 "What is the difference between a load balancer and a reverse proxy?",
                 "Explain continuous integration and continuous delivery.",
-                "What is the purpose of a CDN?",
                 "What is IaC and how does it work?",
-                "What is containerization and how does it work?",
-                "What are the advantages of using cloud platforms to host, deploy, and scale applications?",
                 "How can you ensure high availability and disaster recovery for your applications?"
             ],
             "dataScienceQuestions": [
@@ -92,7 +94,6 @@
                 "What is the difference between a regression and a classification problem?",
                 "What are some ways to evaluate the performance of a machine learning model?",
                 "Explain overfitting and ways you can prevent it.",
-                "Explain the concept of big data.",
                 "What is deep learning and how does it differ from traditional machine learning?"
             ]
         }
