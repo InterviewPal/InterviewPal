@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import ThemeToggle from '@/components/ThemeToggle'
+import {useTheme} from "@/lib/client/hooks/useTheme";
 
 type NavbarProps = {
-    theme: 'light' | 'dark' | null
-    onClick: () => void
     logo: boolean
 }
-export default function Navbar({ theme, onClick, logo }: NavbarProps) {
+export default function Navbar({ logo }: NavbarProps) {
+    const {theme, handleThemeChange} = useTheme();
+
     return (
         logo ? (
         <div className="flex flex-row items-center justify-between w-full px-4 h-24 md:px-24">
@@ -22,7 +23,7 @@ export default function Navbar({ theme, onClick, logo }: NavbarProps) {
                         About
                     </span>
                 </Link>
-                <ThemeToggle theme={theme} onClick={onClick} />
+                <ThemeToggle theme={theme} onClick={handleThemeChange} />
             </div>
         </div >
         ) : (
@@ -34,7 +35,7 @@ export default function Navbar({ theme, onClick, logo }: NavbarProps) {
                 </div>
             </Link>
             <div className="flex flex-row items-center justify-end mr-2">
-                <ThemeToggle theme={theme} onClick={onClick} />
+                <ThemeToggle theme={theme} onClick={handleThemeChange} />
             </div>
         </div >
         )
