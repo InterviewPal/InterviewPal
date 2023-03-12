@@ -23,6 +23,8 @@ export default async function handler(
         return;
     }
 
+    console.log("/done payload", payload)
+
     // stream chunguses
     const stream = await InterviewService.assessAllInterviewQuestions(payload);
     return new Response(stream);

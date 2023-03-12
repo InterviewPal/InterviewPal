@@ -11,6 +11,8 @@ import {useInterview} from "@/lib/client/hooks/useInterview";
 import ChatBubble from "@/components/ChatBubble";
 import {useChatRoomHelpers} from "@/lib/client/hooks/useChatRoomHelpers";
 import {ResultBox} from "@/components/ResultBox";
+import {getAllInterviewQuestionResults, getOverallAnswer} from "@/lib/client/services/interview.service";
+import {ChatgptAnswer} from "@/lib/shared/models/chatgptAnswer.model";
 
 export default function Home() {
     const router = useRouter();
@@ -23,8 +25,13 @@ export default function Home() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<null | number>(null)
     const [answer, setAnswer] = useState('')
     const [answerLength, setAnswerLength] = useState(0)
+    const chatGPTSavedAnswers = useRef<Array<ChatgptAnswer>>([]);
 
-    const [chatBubbles, setChatBubbles] = useState<{ inverted: boolean, content: string }[]>([]);
+    const [shouldAskForOverallFeedback, setShouldAskForOverallFeedback] = useState(false);
+
+    const [coolDown, setCoolDown] = useState(false);
+
+    const [chatBubbles, setChatBubbles] = useState<Array<{ inverted: boolean, content: string } | ChatgptAnswer>>([]);
 
     const chatRoomRef = useRef<HTMLDivElement>(null);
 
@@ -43,11 +50,16 @@ export default function Home() {
 
     async function handleSubmit (e?: React.FormEvent<HTMLFormElement>) {
         e?.preventDefault();
+        if (coolDown) {
+            return;
+        }
         console.log(answer, answerLength, currentQuestionIndex, questions[currentQuestionIndex ?? -1]);
         if (currentQuestionIndex === null || interview === null || userTmpUuid === null || answer.trim() === '') {
             console.error('currentQuestionIndex is null');
             return;
         }
+
+        setCoolDown(true);
 
         InterviewService.submitOneQuestion({
             tmpUserUUID: userTmpUuid,
@@ -57,23 +69,98 @@ export default function Home() {
             userAnswerContent: answer,
         }).then((res) => {
             console.log('submitted question - response: ', res);
+            chatGPTSavedAnswers.current = [...chatGPTSavedAnswers.current, res];
+            setCoolDown(false);
+            console.log(currentQuestionIndex, questions.length, currentQuestionIndex + 1 < questions.length);
+            if (!(currentQuestionIndex + 1 < questions.length)) {
+                // we are done with the interview
+                setShouldAskForOverallFeedback(true);
+            }
         }).catch(console.error);
 
         if (currentQuestionIndex + 1 < questions.length) {
             // reset the inputs and move to the next question
-            setCurrentQuestionIndex(prev => prev! + 1);
             setAnswer('');
             setAnswerLength(0);
+            setCurrentQuestionIndex(prev => prev! + 1);
             setChatBubbles(prev => [...prev,
                 {inverted: true, content: answer},
                 {inverted: false, content: questions[currentQuestionIndex + 1]},
             ]);
             return;
         }
-
-        // we are done with the interview
-
     }
+
+    useEffect(() => {
+        (async () => {
+           if (!shouldAskForOverallFeedback) {
+               return;
+           }
+           if (interview === null || userTmpUuid === null) {
+                console.error('interview or userTmpUuid is null');
+                return;
+           }
+
+            // scroll to the top
+            chatRoomRef.current?.scrollIntoView({behavior: "smooth"});
+            chatRoomRef.current!.scrollTop = chatRoomRef.current?.scrollHeight ?? 0;
+
+            console.log(chatGPTSavedAnswers)
+
+            const allInterviewQuestions = await InterviewService.getAllInterviewQuestionResults({interviewUUID: interview.uuid});
+            if (allInterviewQuestions === null) {
+                console.error('allInterviewQuestions is null', 'interviewUUID', interview.uuid);
+                return;
+            }
+
+            setChatBubbles((prevChatBubble) => {
+                const newResult: Array<{ inverted: boolean, content: string } | ChatgptAnswer> = [];
+
+                for (let i = 0; i < allInterviewQuestions.length; i++) {
+                    const interviewQuestion = allInterviewQuestions[i];
+
+                    console.log("interviewQuestion", interviewQuestion)
+
+                    newResult.push({inverted: false, content: interviewQuestion.question});
+                    newResult.push({inverted: true, content: interviewQuestion.userAnswer});
+                    newResult.push(JSON.parse(interviewQuestion.systemAnswer) as ChatgptAnswer);
+                }
+
+                return newResult;
+            });
+
+            // show the overall result as well
+            const overallResult = await InterviewService.getOverallAnswer({
+                interviewUUID: interview.uuid,
+                tmpUserUUID: userTmpUuid,
+            });
+            if (overallResult === undefined) {
+                console.error('overallResult is undefined', 'interviewUUID', interview.uuid, 'tmpUserUUID', userTmpUuid);
+                return;
+            }
+
+            const reader = overallResult.getReader();
+            const decoder = new TextDecoder();
+            let done = false;
+
+            let overallResultText = '';
+            while (!done) {
+                const { value, done: doneReading } = await reader.read();
+                done = doneReading;
+                const chunkValue = decoder.decode(value);
+                overallResultText += chunkValue;
+            }
+
+            console.log('overallResultText', overallResultText);
+            const overallResultJson = JSON.parse(overallResultText) as ChatgptAnswer;
+
+            // start showing the overall result at the end too.
+            setChatBubbles(prev => [...prev, overallResultJson]);
+
+            // clear cache of questions
+            localStorage.removeItem('questions');
+        })()
+    }, [shouldAskForOverallFeedback]);
 
     if (isFetchingInterviewDone && interview === null) {
         router.push('/404');
@@ -101,15 +188,16 @@ export default function Home() {
                         <div ref={chatRoomRef}
                             className="flex flex-col flex-1 mb-5 rounded-3xl mr-5 overflow-y-auto overflow-x-hidden mt-24 pt-4 pl-4 bg-rosePineDawn-surface dark:bg-rosePine-surface">
                             {
-                                chatBubbles.map((bubble, index) => (
-                                    <ChatBubble key={index} inverted={bubble.inverted} text={bubble.content}/>
-                                ))
+                                chatBubbles.map((bubble, index) => {
+                                    const isResult = bubble.hasOwnProperty('grade');
+                                    if (isResult) {
+                                        return <ResultBox key={index} result={bubble as ChatgptAnswer}/>;
+                                    } else {
+                                        const fckTSfornow = bubble as { inverted: boolean, content: string };
+                                        return <ChatBubble key={index} inverted={fckTSfornow.inverted} text={fckTSfornow.content}/>;
+                                    }
+                                })
                             }
-                            <ChatBubble text={"text"} />
-                            {/*<ResultBox />*/}
-                            <ChatBubble inverted text={"text"} />
-                            <ChatBubble inverted text={"text"} />
-                            <ChatBubble  text={"text"} />
                         </div>
                         {/* Imput Area */}
                         <div className="bottom-0 left-0 w-full">

@@ -74,6 +74,8 @@ Please grade my answer and give me feedback. Do not provide a summary paragraph 
             `
         });
 
+        console.log("content: ", content)
+
         const stream = await OpenAIStreamService.getCompletionStream({
             model: "gpt-3.5-turbo",
             messages: [
@@ -92,6 +94,8 @@ Please grade my answer and give me feedback. Do not provide a summary paragraph 
             stream: true,
             n: 1,
         });
+
+        console.log("stream: ", stream)
 
         return stream;
     },

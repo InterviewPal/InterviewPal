@@ -1,6 +1,6 @@
 import {ApiRequestService} from "@/lib/client/services/apiRequest.service";
 import {CreateInterviewPayload} from "@/lib/shared/dtos/createInterview.payload";
-import {Interview, InterviewType} from "@/lib/shared/models/interview.models";
+import {Interview, InterviewQuestion, InterviewType} from "@/lib/shared/models/interview.models";
 import {AssessAllInterviewQuestionsPayload, InterviewQuestionSubmissionPayload} from "@/lib/shared/dtos";
 
 export async function createInterview({type}: {type: InterviewType}) {
@@ -84,4 +84,17 @@ export async function getOverallAnswer(payload: AssessAllInterviewQuestionsPaylo
     if (!data) return;
 
     return data;
+}
+
+export async function getAllInterviewQuestionResults({interviewUUID}: {interviewUUID: string}) {
+    const result = await ApiRequestService.get({
+        url: `/api/interview/getAllAnswers/${interviewUUID}`,
+        shouldAuth: true,
+    });
+
+    if (result.status === 200) {
+        return await result.json() as unknown as InterviewQuestion[];
+    }
+    console.log(result, await result.json());
+    return null;
 }
