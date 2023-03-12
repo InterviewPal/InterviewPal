@@ -16,6 +16,7 @@ export default function Home() {
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<null | number>(null)
     const [answer, setAnswer] = useState('')
+    const [answerLength, setAnswerLength] = useState(0)
 
     useEffect(() => {
         console.log('isDone', isDone, questions)
@@ -53,15 +54,26 @@ export default function Home() {
                         {/* Imput Area */}
                         <div className="absolute bottom-0 left-0 w-full">
                             <form onSubmit={handleSubmit} className="stretch mx-2 flex flex-row gap-3 last:mb-2 md:last:mb-6 lg:mx-auto lg:max-w-3xl">
-                                <div className="flex flex-col w-full py-2 flex-grow md:py-3 md:pl-4 relative border-2 border-rosePineDawn-highlightHigh dark:border-rosePine-highlightHigh rounded-md bg-rosePineDawn-highlightLow dark:bg-rosePine-highlightLow">
-                                    <textarea onInput={(event) => {
-                                        const element = event.target as HTMLTextAreaElement;
-                                        element.style.height = "5px";
-                                        element.style.height = (element.scrollHeight + 5) + "px";
-                                    }} className="message-text-area m-0 w-full resize-none bg-transparent p-0 pl-2 pr-7 md:pl-0 min-h-[61px] max-h-60" rows={1} placeholder="Type your answer here" tabIndex={1} />
+                                <div className="flex flex-col w-full py-5 md:pl-4 relative border-2 border-rosePineDawn-highlightHigh dark:border-rosePine-highlightHigh rounded-md bg-rosePineDawn-highlightLow dark:bg-rosePine-highlightLow">
+                                    <textarea
+                                        onInput={(event) => {
+                                            const element = event.target as HTMLTextAreaElement;
+                                            element.style.height = "5px";
+                                            element.style.height = (element.scrollHeight + 5) + "px";
+
+                                        }}
+                                        onChange={(event) => {
+                                            const element = event.target as HTMLTextAreaElement;
+                                            setAnswer(element.value);
+                                            setAnswerLength(element.value.length);
+                                        }}
+                                        className="message-text-area m-0 w-full resize-none bg-transparent p-0 pl-2 pr-8 md:pl-0 min-h-[61px] max-h-60" rows={1} placeholder="Type your answer here" tabIndex={1} maxLength={1200} />
+                                    <div className="absolute top-1 right-1 flex flex-row gap-2 items-center">
+                                        <div className="text-xs text-rosePineDawn-text dark:text-rosePine-text">{answerLength}/1200</div>
+                                    </div>
                                     <button
                                         type="submit"
-                                        className="absolute p-1 rounded-md text-gray-500 bottom-1.5 right-1 md:bottom-2.5 md:right-2 bg-rosePine-foam hover:bg-rosePineDawn-foam dark:bg-rosePineDawn-love hover:dark:bg-rosePine-love"
+                                        className="absolute p-1 rounded-md text-gray-500 bottom-3.5 right-3.5 bg-rosePine-foam hover:bg-rosePineDawn-foam dark:bg-rosePineDawn-love hover:dark:bg-rosePine-love"
                                     >
                                         <svg
                                             className="h-4 w-4 mr-1"
