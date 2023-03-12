@@ -29,12 +29,12 @@ export default function Home() {
         console.log();
     }
 
-    // if (notFound) {
-    //     return <div>Interview Not found</div>;
-    // }
-    // if (interviewId === undefined || !isAuthed || !isDone) {
-    //     return <Loading />;
-    // }
+    if (notFound) {
+        return <div>Interview Not found</div>;
+    }
+    if (interviewId === undefined || !isAuthed || !isDone) {
+        return <Loading />;
+    }
 
     return (
         <>
