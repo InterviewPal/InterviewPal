@@ -70,7 +70,7 @@ export default function Home() {
                         {/* Imput Area */}
                         <div className="absolute bottom-0 left-0 w-full">
                             <form onSubmit={handleSubmit} className="stretch mx-2 flex flex-row gap-3 last:mb-2 md:last:mb-6 lg:mx-auto lg:max-w-3xl">
-                                <div className="flex flex-col w-full py-5 md:pl-4 relative border-2 border-rosePineDawn-highlightHigh dark:border-rosePine-highlightHigh rounded-md bg-rosePineDawn-highlightLow dark:bg-rosePine-highlightLow">
+                                <div className="flex flex-col w-full pt-5 pb-3 md:pl-4 relative border-2 border-rosePineDawn-highlightHigh dark:border-rosePine-highlightHigh rounded-md bg-rosePineDawn-highlightLow dark:bg-rosePine-highlightLow">
                                     <textarea
                                         onInput={(event) => {
                                             const element = event.target as HTMLTextAreaElement;
