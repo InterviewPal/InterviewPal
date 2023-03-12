@@ -21,7 +21,7 @@ export default async function handler(
                 return;
             }
 
-            const payload = inputValidator(req.body);
+            const payload = inputValidator(req.query);
             if (payload == null) {
                 // invalid input
                 res.status(400).json({ message: 'Bad Input'});
@@ -40,7 +40,7 @@ export default async function handler(
                 length: 5,
             })
 
-            res.status(201).json(questions);
+            res.status(200).json(questions);
             break;
         default:
             res.setHeader('Allow', ['POST']);
