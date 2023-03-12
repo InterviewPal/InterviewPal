@@ -18,7 +18,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar logo />
-            <main className="text-rosePineDawn-text dark:text-rosePineMoon-text">
+            <main className="text-rosePineDawn-text dark:text-rosePineMoon-text pt-24">
                 <div className="flex flex-col items-center justify-center py-24 xl:py-44">
                     <HeroText />
                     <div className="flex justify-center mt-12">

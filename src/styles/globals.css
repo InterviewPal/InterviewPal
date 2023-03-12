@@ -1,7 +1,7 @@
 @tailwind base;
 /* Firefox */
 * {
-    scrollbar-width: auto;
+    scrollbar-width: thin;
     scrollbar-color: var(--primary) var(--secondary);
 }
 
