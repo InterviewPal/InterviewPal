@@ -120,8 +120,10 @@ Please grade my answer and give me feedback. Do not provide a summary paragraph 
             systemAnswer: answer,
         };
 
-        const redisSuccess = await RedisService.redis.hmset(`user:${payload.tmpUserUUID}:interviewId:${payload.interviewUUID}:${payload.promptNumber}`, result);
+        const redisKey = `user:${payload.tmpUserUUID}:interviewId:${payload.interviewUUID}:${payload.promptNumber}`;
+        const redisSuccess = await RedisService.redis.hmset(redisKey, result);
         if (redisSuccess !== "OK") {
+            await RedisService.redis.expire(redisKey, 60 * 60)
             console.error("Failed to save to Redis ⚠️");
         }
         return answer;

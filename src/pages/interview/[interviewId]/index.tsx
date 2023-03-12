@@ -72,7 +72,7 @@ export default function Home() {
         }
 
         // we are done with the interview
-        router.push(`/interview/${interview.uuid}/results`);
+
     }
 
     if (isFetchingInterviewDone && interview === null) {

@@ -13,6 +13,7 @@ export const InterviewRepository = {
         }
         const success = await RedisService.redis.hmset(`interview:${interview.uuid}`, interview);
         if (success) {
+            await RedisService.redis.expire(`interview:${interview.uuid}`, 60 * 60)
             return interview;
         }
         return null;
