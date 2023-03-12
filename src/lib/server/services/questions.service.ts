@@ -5,8 +5,14 @@ export const QuestionService = {
     // fetchs random questions from questions.json file
     async fetchQuestions({interviewType, length}: {interviewType: InterviewType, length: number}){
         const questionSet = questions[interviewType];
-        const shuffledQuestions = questionSet.sort(() => 0.5 - Math.random());
-        const selectedQuestions = shuffledQuestions.slice(0, length);
+        const spliceIndex = questionSet.indexOf("SEPARATOR");
+        const personalQuestions = questionSet.slice(0, spliceIndex);
+        const technicalQuestions = questionSet.slice(spliceIndex + 1);
+        const shuffledPersonalQuestions = personalQuestions.sort(() => 0.5 - Math.random());
+        const shuffledTechnicalQuestions = technicalQuestions.sort(() => 0.5 - Math.random());
+        const selectedPersonalQuestions = shuffledPersonalQuestions.slice(0, length - 2);
+        const selectedTechnicalQuestions = shuffledTechnicalQuestions.slice(0, 2);
+        const selectedQuestions = [...selectedPersonalQuestions, ...selectedTechnicalQuestions];
         return selectedQuestions;
     }
 }
