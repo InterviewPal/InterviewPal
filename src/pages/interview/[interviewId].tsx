@@ -40,7 +40,7 @@ export default function Home() {
             question: '',
             userAnswerContent: '',
         }).then((res) => {
-           // ignore the response for now
+            // ignore the response for now
         }).catch(console.error);
 
         console.log(answer, answerLength, currentQuestionIndex, questions[currentQuestionIndex ?? -1]);
@@ -64,9 +64,12 @@ export default function Home() {
             <Navbar logo={false} />
             <main className="text-rosePineDawn-text dark:text-rosePine-text overflow-hidden w-full h-full relative">
                 {/* Middle */}
-                <div className="flex h-full flex-1 flex-col md:pl-[280px]">
+                <div className="flex h-full flex-1 flex-col md:pl-[360px]">
                     <div className="relative h-full w-full transition-width flex flex-col overflow-hidden items-stretch flex-1">
                         {/* Text Area */}
+                        <div className="flex flex-col flex-1 overflow-y-auto h-full bg-rosePineDawn-surface dark:bg-rosePine-surface">
+
+                        </div>
                         {/* Imput Area */}
                         <div className="absolute bottom-0 left-0 w-full">
                             <form onSubmit={handleSubmit} className="stretch mx-2 flex flex-row gap-3 last:mb-2 md:last:mb-6 lg:mx-auto lg:max-w-3xl">
@@ -100,8 +103,18 @@ export default function Home() {
                     </div>
                 </div>
                 {/* Left Side */}
-                <div className="hidden md:fixed md:top-24 md:bottom-0 md:flex md:w-[280px] md:flex-col -mt-8 ml-4">
-                    <Image src="/suit-logo.png" alt="hero" width={280} height={280} />
+                <div className="hidden md:fixed md:top-24 md:bottom-0 md:flex md:w-[360px] md:flex-col -mt-8 ml-4">
+                    <div className="flex flex-col justify-center items-center">
+                        <Image src="/suit-logo.png" alt="hero" width={280} height={280} />
+                        <hr className="border-rosePineDawn-text dark:border-rosePine-text w-5/6 border-2 mt-3" />
+                        <span className="text-4xl font-bold mt-4">
+                            {currentQuestionIndex !== null && questions[currentQuestionIndex]
+                                ? currentQuestionIndex + 1 : 0} / {questions.length}
+                        </span>
+                        <p className="text-sm mt-2">
+                            Questions Answered
+                        </p>
+                    </div>
                 </div>
             </main>
 
