@@ -68,34 +68,27 @@
         "How does serverless computing work?"
     ],
     "technicalQuestions": [
-        "SEPARATOR",
-        { 
-            "webDevQuestions": [
-                "Can you explain why responsiveness and accessibility are important in web development?",
-                "What is server-side rendering and why is it important?",
-                "What are some pros and cons of hydration?"
-            ],
-            "backendDevQuestions": [
-                "How do you handle security concerns in backend development, such as protecting against SQL injection attacks or cross-site scripting (XSS)?",
-                "Can you describe the design and use of microservices?",
-                "Explain the usage and process of load testing.",
-                "How do you handle data storage and retrieval in distributed systems?",
-                "What is the difference between garbage collection and manual memory management?",
-                "What is a runtime system and what are some features of one?"
-            ],
-            "devOpsQuestions": [
-                "What is the difference between a load balancer and a reverse proxy?",
-                "Explain continuous integration and continuous delivery.",
-                "What is IaC and how does it work?",
-                "How can you ensure high availability and disaster recovery for your applications?"
-            ],
-            "dataScienceQuestions": [
-                "What is the difference between supervised and unsupervised learning?",
-                "What is the difference between a regression and a classification problem?",
-                "What are some ways to evaluate the performance of a machine learning model?",
-                "Explain overfitting and ways you can prevent it.",
-                "What is deep learning and how does it differ from traditional machine learning?"
-            ]
-        }
+        "webDevQuestions",
+        "Can you explain why responsiveness and accessibility are important in web development?",
+        "What is server-side rendering and why is it important?",
+        "What are some pros and cons of hydration?",
+        "backendDevQuestions",
+        "How do you handle security concerns in backend development, such as protecting against SQL injection attacks or cross-site scripting (XSS)?",
+        "Can you describe the design and use of microservices?",
+        "Explain the usage and process of load testing.",
+        "How do you handle data storage and retrieval in distributed systems?",
+        "What is the difference between garbage collection and manual memory management?",
+        "What is a runtime system and what are some features of one?",
+        "devOpsQuestions",
+        "What is the difference between a load balancer and a reverse proxy?",
+        "Explain continuous integration and continuous delivery.",
+        "What is IaC and how does it work?",
+        "How can you ensure high availability and disaster recovery for your applications?",
+        "dataScienceQuestions",
+        "What is the difference between supervised and unsupervised learning?",
+        "What is the difference between a regression and a classification problem?",
+        "What are some ways to evaluate the performance of a machine learning model?",
+        "Explain overfitting and ways you can prevent it.",
+        "What is deep learning and how does it differ from traditional machine learning?"
     ]
 }
