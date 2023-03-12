@@ -50,7 +50,7 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Navbar theme={theme} onClick={handleThemeChange} />
+            <Navbar logo theme={theme} onClick={handleThemeChange} />
             <main className="text-rosePineDawn-text dark:text-rosePineMoon-text">
                 <div className="flex flex-col items-center justify-center py-24 xl:py-44">
                     <HeroText />

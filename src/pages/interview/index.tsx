@@ -45,7 +45,7 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Navbar theme={theme} onClick={handleThemeChange} />
+            <Navbar logo={false} theme={theme} onClick={handleThemeChange} />
             <main>
                 {/* 2 wide flex with one element beign 1/5 wide the other being 4/5 wide */}
                 <div className="flex flex-row">

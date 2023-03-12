@@ -5,12 +5,14 @@ import ThemeToggle from '@/components/ThemeToggle'
 type NavbarProps = {
     theme: 'light' | 'dark' | null
     onClick: () => void
+    logo: boolean
 }
-export default function Navbar({ theme, onClick }: NavbarProps) {
+export default function Navbar({ theme, onClick, logo }: NavbarProps) {
     return (
-        <div className="flex flex-row items-center justify-between w-full px-4 py-6 md:px-24">
+        logo ? (
+        <div className="flex flex-row items-center justify-between w-full px-4 py-4 md:px-24">
             <div className="flex flex-row items-center justify-start">
-                <Link className="flex flex-row items-center justify-center" href="/">
+                <Link className="flex flex-row items-center justify-center -p-7 mt-4" href="/">
                     <Image src="/logo.png" alt="InterviewPal Logo" width={70} height={70} />
                 </Link>
             </div>
@@ -23,5 +25,16 @@ export default function Navbar({ theme, onClick }: NavbarProps) {
                 <ThemeToggle theme={theme} onClick={onClick} />
             </div>
         </div >
+        ) : (
+        <div className="flex flex-row items-center justify-between w-full px-4 py-4 md:px-24">
+            <div className="flex flex-row items-center justify-start text-3xl h-11 mt-2">
+                <span className="block text-transparent bg-clip-text bg-gradient-to-br from-rosePineDawn-foam to-rosePine-foam dark:from-rosePine-love dark:to-rosePine-rose">Interview</span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-br from-rosePine-rose to-rosePineDawn-love dark:from-rosePine-foam dark:to-rosePine-pine">Pal.</span>
+            </div>
+            <div className="flex flex-row items-center justify-end mr-2">
+                <ThemeToggle theme={theme} onClick={onClick} />
+            </div>
+        </div >
+        )
     )
 }
