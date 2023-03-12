@@ -10,8 +10,9 @@ export default function Navbar({ logo }: NavbarProps) {
     const {theme, handleThemeChange} = useTheme();
 
     return (
+
         logo ? (
-        <div className="flex flex-row items-center justify-between w-full px-4 h-24 md:px-24">
+        <div className="flex flex-row items-center justify-between w-full px-4 h-24 md:px-24 absolute top-0 left-0 z-50">
             <div className="flex flex-row items-center justify-start">
                 <Link className="flex flex-row items-center justify-center -p-8" href="/">
                     <Image src="/logo.png" alt="InterviewPal Logo" width={70} height={70} />
@@ -27,7 +28,7 @@ export default function Navbar({ logo }: NavbarProps) {
             </div>
         </div >
         ) : (
-        <div className="flex flex-row items-center justify-between w-full px-4 h-24 md:px-24">
+        <div className="flex flex-row items-center justify-between w-full px-4 h-24 md:px-24 absolute top-0 left-0 z-50">
             <Link href={'/'}>
                 <div className="flex flex-row items-center justify-start text-3xl">
                     <span className="block text-transparent bg-clip-text bg-gradient-to-br from-rosePineDawn-foam to-rosePine-foam dark:from-rosePine-love dark:to-rosePine-rose">Interview</span>
