@@ -35,7 +35,7 @@ function inputValidator(payload: unknown): InterviewQuestionSubmissionPayload | 
         interviewUUID: z.string(),
         promptNumber: z.number(),
         question: z.string(),
-        userAnswerContent: z.string(),
+        userAnswerContent: z.string().max(1200),
     });
 
     const result = interviewQuestionSubmissionPayload.safeParse(payload);
