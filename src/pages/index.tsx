@@ -11,14 +11,16 @@ import {useState} from "react";
 export default function Home() {
     const router = useRouter();
 
-    const [isMutating, setIsMutating] = useState(true);
+    const [isMutating, setIsMutating] = useState(false);
 
     const handleStart = async () => {
-
+        setIsMutating(true);
         const interview = await InterviewService.createInterview({type: InterviewType.personalQuestions});
         if (!interview) {
-
+            // TODO: Handle error and show the error to the user
+            return;
         }
+        router.push(`/interview/${interview.uuid}`);
     };
 
     return (

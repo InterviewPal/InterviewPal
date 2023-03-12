@@ -18,7 +18,8 @@ export default function Home() {
     const [answer, setAnswer] = useState('')
 
     useEffect(() => {
-        if (questions.length > 0) {
+        console.log('isDone', isDone, questions)
+        if (isDone && questions.length > 0) {
             setCurrentQuestionIndex(0);
         }
     }, [isDone]);
@@ -28,12 +29,12 @@ export default function Home() {
         console.log();
     }
 
-    // if (notFound) {
-    //     return <div>Interview Not found</div>;
-    // }
-    // if (interviewId === undefined || !isAuthed || !isDone) {
-    //     return <Loading />;
-    // }
+    if (notFound) {
+        return <div>Interview Not found</div>;
+    }
+    if (interviewId === undefined || !isAuthed || !isDone) {
+        return <Loading />;
+    }
 
     return (
         <>
