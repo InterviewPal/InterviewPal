@@ -9,24 +9,9 @@ import {useTmpAuth} from "@/lib/client/hooks/useTmpAuth";
 import * as InterviewService from "@/lib/client/services/interview.service";
 import {useInterview} from "@/lib/client/hooks/useInterview";
 import ChatBubble from "@/components/ChatBubble";
+import {useChatRoomHelpers} from "@/lib/client/hooks/useChatRoomHelpers";
 
 export default function Home() {
-    const text = `Great Answer:
-
-Synchronous programming is when the code is executed in a sequential manner, one statement at a time. The program will wait for a task to be completed before moving on to the next one. Asynchronous programming is when the program can continue to execute other tasks while waiting for a long-running task to complete. This approach is often used when waiting for I/O operations or other time-consuming processes.
-
-Partial Answer:
-
-Synchronous programming is when code is executed one statement at a time, while asynchronous programming is when code can continue to execute other tasks while waiting for a long-running task to complete.
-
-Too Simple Answer:
-
-Synchronous programming is when code runs one line at a time, and asynchronous programming is when it runs many lines at once.
-
-Terrible Answer:
-
-Synchronous programming is like driving a car with a manual transmission, where you have to shift gears one at a time. Asynchronous programming is like driving an automatic car where you can hit the gas pedal and brake at the same time.`;
-
     const router = useRouter();
     const {interviewId} = router.query;
 
@@ -53,34 +38,9 @@ Synchronous programming is like driving a car with a manual transmission, where 
         }
     }, [isDone]);
 
-    // scroll to the bottom of the chat room when the chat bubbles change
-    useEffect(() => {
-        if (chatRoomRef.current) {
-            chatRoomRef.current.scrollIntoView({behavior: "smooth"});
-            chatRoomRef.current.scrollTop = chatRoomRef.current.scrollHeight ?? 0;
-        }
-    }, [chatBubbles]);
+    useChatRoomHelpers({chatRoomRef, chatBubbles, handleSubmit, currentQuestionIndex, answer});
 
-    // handle the enter key press -> (next question or submit the interview)
-    useEffect(() => {
-        const keyDownHandler = (e: KeyboardEvent) => {
-            // check if the user holds the shift key
-            if (e.shiftKey) {
-                return;
-            }
-            if (e.key === "Enter" ) {
-                handleSubmit();
-            }
-        };
-
-        document.addEventListener('keydown', keyDownHandler);
-
-        return () => {
-            document.removeEventListener('keydown', keyDownHandler);
-        };
-    }, [currentQuestionIndex, answer, chatBubbles]);
-
-    const handleSubmit = async (e?: React.FormEvent<HTMLFormElement>) => {
+    async function handleSubmit (e?: React.FormEvent<HTMLFormElement>) {
         e?.preventDefault();
         console.log(answer, answerLength, currentQuestionIndex, questions[currentQuestionIndex ?? -1]);
         if (currentQuestionIndex === null || interview === null || userTmpUuid === null || answer.trim() === '') {
@@ -112,7 +72,7 @@ Synchronous programming is like driving a car with a manual transmission, where 
 
         // we are done with the interview
         router.push(`/interview/${interview.uuid}/results`);
-    };
+    }
 
     if (isFetchingInterviewDone && interview === null) {
         router.push('/404');
