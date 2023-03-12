@@ -30,3 +30,7 @@ export async function getInterviewQuestions({interviewId}: {interviewId: string}
     console.log(result, await result.json());
     return null;
 }
+
+export async function submitOneQuestion() {
+
+}

@@ -1,4 +1,5 @@
 import {useEffect, useRef, useState} from "react";
+import {ApiRequestService} from "@/lib/client/services/apiRequest.service";
 
 interface HookProps {
 
@@ -16,13 +17,10 @@ export function useTmpAuth({}: HookProps) {
         }
         (async () => {
             const uuid = localStorage.getItem('interviewpal:uuid');
-            const result = await fetch('/api/auth', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authentication': 'Bearer ' + uuid || '',
-                },
-                body: JSON.stringify({uuid}),
+            const result = await ApiRequestService.post({
+                url: '/api/auth',
+                params: { uuid },
+                shouldAuth: true,
             });
             const {uuid: newUuid} = await result.json();
 
