@@ -4,7 +4,7 @@ export const ApiRequestService = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${tokenUUID ? tokenUUID : (shouldAuth ? localStorage.getItem('token') : '')}`,
+                'Authorization': `Bearer ${tokenUUID ? tokenUUID : (shouldAuth ? localStorage.getItem('interviewpal:uuid') : '')}`,
             },
         });
     },
@@ -13,7 +13,7 @@ export const ApiRequestService = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${tokenUUID ? tokenUUID : (shouldAuth ? localStorage.getItem('token') : '')}`,
+                'Authorization': `Bearer ${tokenUUID ? tokenUUID : (shouldAuth ? localStorage.getItem('interviewpal:uuid') : '')}`,
             },
             body: JSON.stringify(params),
         });
@@ -23,7 +23,7 @@ export const ApiRequestService = {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${tokenUUID ? tokenUUID : (shouldAuth ? localStorage.getItem('token') : '')}`,
+                'Authorization': `Bearer ${tokenUUID ? tokenUUID : (shouldAuth ? localStorage.getItem('interviewpal:uuid') : '')}`,
             },
             body: JSON.stringify(params),
         });

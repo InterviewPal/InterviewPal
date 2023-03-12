@@ -7,11 +7,11 @@ interface HookProps {
 // use local storage to store the uuid token.
 // if the token is not valid, it will be refreshed (new user).
 export function useTmpAuth({}: HookProps) {
-    const isAuthed = useRef(false);
+    const [isAuthed, setIsAuthed] = useState(false);
     const [uuid, setUuid] = useState<string | null>(null);
 
     useEffect(() => {
-        if (isAuthed.current) {
+        if (isAuthed) {
             return;
         }
         (async () => {
@@ -28,9 +28,9 @@ export function useTmpAuth({}: HookProps) {
 
             localStorage.setItem('interviewpal:uuid', newUuid);
             setUuid(newUuid);
-            isAuthed.current = true;
+            setIsAuthed(true);
         })();
     }, []);
 
-    return {uuid};
+    return {uuid, isAuthed};
 }
