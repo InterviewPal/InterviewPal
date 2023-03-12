@@ -11,7 +11,7 @@ export function useQuestions({interviewId}: {interviewId: string}) {
             if (isDone || !interviewId) {
                 return;
             }
-            const storedQuestions = await localStorage.getItem('questions');
+            const storedQuestions = localStorage.getItem('questions');
             if (storedQuestions) {
                 setQuestions(JSON.parse(storedQuestions));
                 setIsDone(true);
