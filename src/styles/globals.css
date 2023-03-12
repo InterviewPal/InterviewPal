@@ -33,6 +33,10 @@
 }
 
 @layer components {
+  textarea:focus, input:focus{
+    outline: none;
+  }
+
   .speech-bubble {
     position: relative;
     background: #00aabb;
@@ -78,7 +82,7 @@
     height: 24px;
     overflow-y: hidden;
   }
-  
+
   #root,
   #__next {
     height: 100%;
