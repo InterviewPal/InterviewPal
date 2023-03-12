@@ -7,12 +7,14 @@ import { useRouter } from "next/router";
 import { Loading } from "@/components/Loading";
 import { useTmpAuth } from "@/lib/client/hooks/useTmpAuth";
 import * as InterviewService from "@/lib/client/services/interview.service";
+import {useInterview} from "@/lib/client/hooks/useInterview";
 
 export default function Home() {
     const router = useRouter();
     const { interviewId } = router.query;
 
     const { isAuthed, userTmpUuid } = useTmpAuth({});
+    const { isDone: isFetchingInterviewDone, interview } = useInterview(interviewId as string);
     const { isDone, questions, notFound } = useQuestions({ interviewId: interviewId as string });
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<null | number>(null)
@@ -46,10 +48,11 @@ export default function Home() {
         console.log(answer, answerLength, currentQuestionIndex, questions[currentQuestionIndex ?? -1]);
     }
 
-    if (notFound) {
-        return <div>Interview Not found</div>;
+    if (isFetchingInterviewDone && interview === null) {
+        router.push('/404');
+        return <Loading />;
     }
-    if (interviewId === undefined || !isAuthed || !isDone) {
+    if (interviewId === undefined || !isAuthed || !isDone || !isFetchingInterviewDone) {
         return <Loading />;
     }
 

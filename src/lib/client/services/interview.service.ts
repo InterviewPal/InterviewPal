@@ -19,6 +19,19 @@ export async function createInterview({type}: {type: InterviewType}) {
     return null;
 }
 
+export async function getInterviewById({ interviewUUID }: { interviewUUID: string}) {
+    const response = await ApiRequestService.get({
+        url: `/api/interview/${interviewUUID}`,
+        shouldAuth: true,
+    });
+
+    if (response.status === 200) {
+        return await response.json() as unknown as Interview;
+    }
+
+    return null;
+}
+
 export async function getInterviewQuestions({interviewId}: {interviewId: string}) {
     const result = await ApiRequestService.get({
         url: `/api/interview/mock/introductory/getRandomQuestions/${interviewId}`,

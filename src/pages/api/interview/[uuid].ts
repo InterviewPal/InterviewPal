@@ -20,8 +20,8 @@ export default async function handler(
                 return;
             }
 
-            const { uuid } = req.body;
-            if (!uuid) {
+            const { uuid } = req.query;
+            if (uuid === undefined || typeof uuid !== 'string') {
                 res.status(400).json({ message: 'Bad Request' });
                 return;
             }
