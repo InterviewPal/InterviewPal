@@ -82,8 +82,9 @@
  [![React][React.js]][React-url] \
  [![Tailwind][Tailwind.css]][Tailwind-url]
  [![Vercel][Vercel]][Vercel-url] \
+  [![Redis][Redis]][Redis-url]
  [![RosePine][RosePine]][RosePine-url]
- [![GPT-3.5][GPT-3.5]][GPT-3.5-url]
+ [![GPT-3.5][GPT-3.5]][GPT-3.5-url] 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -111,8 +112,6 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 Remember to create a `.env.local` file in the root of the project and add the following environment variables:
 
@@ -171,3 +170,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 [RosePine-url]: https://rosepine.com/
 [GPT-3.5]: https://img.shields.io/badge/GPT--3-31748f?style=for-the-badge&logo=gpt3&logoColor=white
 [GPT-3.5-url]: https://openai.com/blog/openai-api/
+[Redis]: https://img.shields.io/badge/redis-%23DD0031.svg?&style=for-the-badge&logo=redis&logoColor=white
+[Redis-url]: https://redis.io/
