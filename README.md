@@ -23,7 +23,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/InterviewPal/InterviewPal">
+  <a href="https://interviewpal.vercel.app/">
     <img src="public/logo.png" alt="Logo" width="300" height="300">
   </a>
 <h1 align="center">InterviewPal</h3>
@@ -31,14 +31,13 @@
     InterviewPal is a GPT-3.5 powered AI that helps you practice for your interviews. It will ask you common and relevant interview questions and give you insightful feedback on your answers.
     <br />
     <br />
-    <a href="https://github.com/InterviewPal/InterviewPal">View Demo</a>
+    <a href="https://youtu.be/6CdYp6nNhCk">View Demo</a>
     ·
     <a href="https://github.com/InterviewPal/InterviewPal/issues">Report Bug</a>
     ·
     <a href="https://github.com/InterviewPal/InterviewPal/issues">Request Feature</a>
-  </p>
 </div>
-
+  <a href="https://hackthebreak2023.com/">For Hack The Break</a>
 
 
 <!-- TABLE OF CONTENTS -->
@@ -67,7 +66,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-  <a href="https://www.youtube.com/watch?v=wd6c250FvGkl">
+  <a href="https://interviewpal.vercel.app/">
     <img src="public/frontpage.png" alt="Logo" width="800" height="450">
   </a>
 
@@ -138,7 +137,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 </br>
 <!-- ACKNOWLEDGMENTS -->
 
-## Acknowledgments
+## Our Team
 
 * [Jessie Zhong](https://github.com/token03)
 * [Sean Ng](https://github.com/23o4i7)
