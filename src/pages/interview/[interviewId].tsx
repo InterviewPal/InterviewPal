@@ -2,13 +2,37 @@ import Head from 'next/head'
 import {useEffect, useState} from 'react'
 import Navbar from "@/components/Navbar";
 import Image from 'next/image';
+import {useQuestions} from "@/lib/client/hooks/useQuestions";
+import {useRouter} from "next/router";
+import {Loading} from "@/components/Loading";
+import {useTmpAuth} from "@/lib/client/hooks/useTmpAuth";
 
 export default function Home() {
-    const [question, setQuestion] = useState(null as string | null)
+    const router = useRouter();
+    const {interviewId} = router.query;
+
+    const {isAuthed, uuid} = useTmpAuth({});
+    const {isDone, questions, notFound} = useQuestions({interviewId: interviewId as string});
+
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState<null | number>(null)
+    const [answer, setAnswer] = useState('')
+
+    useEffect(() => {
+        if (questions.length > 0) {
+            setCurrentQuestionIndex(0);
+        }
+    }, [isDone]);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(e.target.answer.value);
+        console.log();
+    }
+
+    if (notFound) {
+        return <div>Interview Not found</div>;
+    }
+    if (interviewId === undefined || !isAuthed || !isDone) {
+        return <Loading />;
     }
 
     return (
@@ -28,10 +52,10 @@ export default function Home() {
                     </div>
                     <div
                         className="flex flex-col w-4/5 rounded-2xl bg-rosePineDawn-highlightMed dark:bg-rosePine-highlightMed justify-between">
-                        {question === null ? (
+                        {currentQuestionIndex === null ? (
                             <div className="flex flex-col flex-grow-1 items-center py-24 xl:py-44">
                                 <h1 className="text-4xl font-bold">Question</h1>
-                                <p className="text-xl mt-4">{question}</p>
+                                <p className="text-xl mt-4">{currentQuestionIndex}</p>
                             </div>
                         ) : undefined}
                         <form method="post" onSubmit={handleSubmit} className="flex flex-row">
@@ -43,7 +67,7 @@ export default function Home() {
                                       className="bg-rosePineDawn-highlightLow dark:bg-rosePine-highlightLow resize-none w-full dark:border-white border-black border-2 p-4 min-h-[61px] max-h-60"
                                       placeholder="Type your answer here..."></textarea>
                             <button type="submit"
-                                    className="bg-rosePineDawn-highlightLow hover:bg-rosePine-iris dark:bg-rosePine-highlightLow p-4 dark:border-white border-black border-2">Submit
+                                    className="bg-rosePineDawn-highlightLow transition-all duration-300 hover:bg-rosePine-iris dark:bg-rosePine-highlightLow dark:hover:bg-rosePine-pine p-4 dark:border-white border-black border-2">Submit
                             </button>
                         </form>
                     </div>
