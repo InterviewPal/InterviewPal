@@ -12,17 +12,17 @@ export default async function handler(
     res: NextApiResponse<ResponseData | ErrorDto>
 ) {
     // Authorize the user and return 401 if not authorized.
-    let uuid = await IdentityService.authorizeSession(req);
-    if (!uuid) {
+    let tmpUser = await IdentityService.authorizeSession(req);
+    if (!tmpUser) {
         // make a new token (new user)
-        uuid = await IdentityService.createNewIdentity();
-        if (!uuid) {
+        tmpUser = await IdentityService.createNewIdentity();
+        if (!tmpUser) {
             res.status(500).json({ message: 'Internal Server Error' });
             return;
         }
-        res.status(201).json({ uuid });
+        res.status(201).json({ uuid: tmpUser.uuid });
         return;
     }
 
-    res.status(200).json({ uuid });
+    res.status(200).json({ uuid: tmpUser.uuid });
 }

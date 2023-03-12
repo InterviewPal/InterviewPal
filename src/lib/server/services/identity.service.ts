@@ -10,12 +10,13 @@ interface TmpUser {
 export const IdentityService = {
     async createNewIdentity() {
         const uuid = v4();
-        const success = await RedisService.redis.hmset(`tmpUser:${uuid}`, {
+        const user: TmpUser = {
             uuid,
             name: "Anonymous",
-        } satisfies TmpUser);
+        };
+        const success = await RedisService.redis.hmset(`tmpUser:${uuid}`, user);
         if (success) {
-            return uuid;
+            return user;
         }
         return null;
     },
