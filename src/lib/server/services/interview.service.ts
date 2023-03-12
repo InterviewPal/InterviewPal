@@ -14,14 +14,17 @@ const systemContent = `You are an interview coach doing a mock interview. Try to
 Respond in a JSON format with objects:
  "pros" which is a single sentence that contains brief and concise positive feedback.
 "cons" which is an array that contains point-form criticisms. provide two to four points, depending on how bad the response was.
-"grade" which is an int representing an overall grade out of 100. be critical, but still reasonable with the grade.
+"grade" which is an int representing an overall grade out of 100. be critical, but still objective with the grade.
 "overall" which represents a summary of the feedback.
+
 {
     "pros": "",
     "cons": [],
     "grade": 0,
     "overall": ""
-}`;
+}
+
+Your response should ONLY BE THE JSON FILE.`;
 
 
 export const InterviewService = {
