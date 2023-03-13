@@ -36,6 +36,11 @@ export default function Navbar({ logo }: NavbarProps) {
                     </div>
                 </Link>
                 <div className="flex flex-row items-center justify-end mr-2">
+                <Link className="flex flex-row mr-8 text-xl items-center justify-center text-rosePineDawn-text dark:text-rosePine-text font-display font-semibold" href="/">
+                        <span className="hover:bg-rosePineDawn-text/40 dark:hover:bg-rosePine-text/40 rounded-md px-2 py-2" style={{ transition: 'all 0.2s ease-in-out' }} >
+                            Return to Home
+                        </span>
+                    </Link>
                     <ThemeToggle theme={theme} onClick={handleThemeChange} />
                 </div>
             </div >
